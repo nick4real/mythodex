@@ -7,4 +7,20 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="View\NoirPro-Bold.ttf" />
+    <None Remove="View\NoirPro-Heavy.ttf" />
+    <None Remove="View\NoirPro-Italic.ttf" />
+    <None Remove="View\NoirPro-Light.ttf" />
+    <None Remove="View\NoirPro-Medium.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\NoirPro-Bold.ttf" />
+    <Resource Include="View\NoirPro-Heavy.ttf" />
+    <Resource Include="View\NoirPro-Italic.ttf" />
+    <Resource Include="View\NoirPro-Light.ttf" />
+    <Resource Include="View\NoirPro-Medium.ttf" />
+  </ItemGroup>
+
 </Project>

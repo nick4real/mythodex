@@ -3,26 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        mc:Ignorable="d"
         Title="MainWindow" 
         Width="1200"
-        Height="800" 
-        mc:Ignorable="d">
+        Height="800"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip" 
+        AllowsTransparency="True"
+        >
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+       CaptionHeight="30"
+       ResizeBorderThickness="6"
+       GlassFrameThickness="0"
+       CornerRadius="0"
+       UseAeroCaptionButtons="False"
+       />
+    </WindowChrome.WindowChrome>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <Grid Grid.Row="0" Background="#969696">
-            
+            <Label HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"
+                   FontFamily="NoirPro ☞"
+                   FontSize="20"
+                   FontStyle="Normal" 
+                   FontWeight="Normal" 
+                   Margin="10,0,0,0" 
+                   Foreground="White">Mythodex
+            </Label>
         </Grid>
-        <Grid Grid.Row="1" >
+        <Grid Grid.Row="1" Background="#D4D4D4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Row="0" Background="#AFAFAF">
-                
+
             </Grid>
         </Grid>
     </Grid>
