@@ -29,15 +29,22 @@
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0" Background="#969696">
-            <Label HorizontalAlignment="Left" 
-                   VerticalAlignment="Center"
-                   FontFamily="NoirPro ☞"
-                   FontSize="20"
-                   FontStyle="Normal" 
-                   FontWeight="Normal" 
-                   Margin="10,0,0,0" 
-                   Foreground="White">Mythodex
-            </Label>
+            <StackPanel>
+                
+                <Label HorizontalAlignment="Left" 
+                       VerticalAlignment="Center"
+                       FontFamily="NoirPro ☞"
+                       FontSize="20"
+                       FontStyle="Normal" 
+                       FontWeight="Normal" 
+                       Margin="10,0,0,0" 
+                       Foreground="White">Mythodex
+                </Label>
+
+                <Button HorizontalAlignment="Right" Height="40" Width="40"/>
+                <Button HorizontalAlignment="Right" Width="40"/>
+                <Button HorizontalAlignment="Right" Width="40" Content="X"/>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Background="#D4D4D4">
             <Grid.ColumnDefinitions>
