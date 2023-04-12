@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -11,29 +12,37 @@ namespace Mythodex.ViewModel
 {
     internal class ViewModelMain : INotifyPropertyChanged
     {
-        private int _number1;
-        public int Number1
+        public ObservableCollection<DragItem> DragItems { get; set; }
+        public ObservableCollection<DragItem> DragItems2 { get; set; }
+        public ObservableCollection<DragItem> DragItems3 { get; set; }
+        public ObservableCollection<DragItem> DragItems4 { get; set; }
+        public ViewModelMain()
         {
-            get { return _number1; }
-            set
+            DragItems = new ObservableCollection<DragItem>
             {
-                _number1 = value;
-                OnPropertyChanged("Number3"); // уведомление View о том, что изменилась сумма
-            }
+                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
+                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
+                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
+            };
+            DragItems2 = new ObservableCollection<DragItem>
+            {
+                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
+                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
+                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
+            };
+            DragItems3 = new ObservableCollection<DragItem>
+            {
+                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
+                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
+                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
+            };
+            DragItems4 = new ObservableCollection<DragItem>
+            {
+                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
+                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
+                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
+            };
         }
-
-        private int _number2;
-        public int Number2
-        {
-            get { return _number2; }
-            set 
-            { 
-                _number2 = value; 
-                OnPropertyChanged("Number3"); 
-            }
-        }
-
-        public int Number3 { get => Model.ModelMain.MathFuncs.GetSumOf(Number1, Number2); }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

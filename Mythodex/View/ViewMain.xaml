@@ -12,49 +12,75 @@
         ResizeMode="CanResizeWithGrip" 
         AllowsTransparency="True"
         >
+    
+    <!--Window size & move border-->
     <WindowChrome.WindowChrome>
         <WindowChrome 
-       CaptionHeight="30"
-       ResizeBorderThickness="6"
-       GlassFrameThickness="0"
-       CornerRadius="0"
-       UseAeroCaptionButtons="False"
-       />
+        CaptionHeight="40"
+        ResizeBorderThickness="6"
+        GlassFrameThickness="0"
+        CornerRadius="0"
+        UseAeroCaptionButtons="False"/>  
     </WindowChrome.WindowChrome>
-
+    
+    <!--Window element styles-->
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="PanelButton">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="30"/>
+        </Style>
+        <Style TargetType="ListBox" x:Key="DragNDrop">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="20"/>
+        </Style>
+    </Window.Resources>
+    
+    <!--Window-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         
+        <!--Top bar-->
         <Grid Grid.Row="0" Background="#969696">
-            <StackPanel>
-                
-                <Label HorizontalAlignment="Left" 
-                       VerticalAlignment="Center"
-                       FontFamily="NoirPro ☞"
-                       FontSize="20"
-                       FontStyle="Normal" 
-                       FontWeight="Normal" 
-                       Margin="10,0,0,0" 
-                       Foreground="White">Mythodex
-                </Label>
-
-                <Button HorizontalAlignment="Right" Height="40" Width="40"/>
-                <Button HorizontalAlignment="Right" Width="40"/>
-                <Button HorizontalAlignment="Right" Width="40" Content="X"/>
-            </StackPanel>
+            <Label 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                FontFamily="NoirPro ☞"
+                FontSize="20"
+                FontStyle="Normal" 
+                FontWeight="Normal" 
+                Margin="10,0,0,0" 
+                Foreground="White"
+                Content="Mythodex"
+            />
+            <Button Style="{StaticResource PanelButton}" Margin="0,0,5,0" Content="X"/>
+            <Button Style="{StaticResource PanelButton}" Margin="0,0,40,0" Content="O"/>
+            <Button Style="{StaticResource PanelButton}" Margin="0,0,75,0" Content="-"/>
         </Grid>
+
+        <!--Lower grid-->
         <Grid Grid.Row="1" Background="#D4D4D4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <Grid Grid.Row="0" Background="#AFAFAF">
+            
+            <!--Side menu-->
+            <Grid Grid.Column="0" Background="#AFAFAF">
 
             </Grid>
+            
+            <!--Main panel-->
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Background="#D4D4D4">
+                <ListBox Style="{StaticResource DragNDrop}"/>
+                <ListBox Style="{StaticResource DragNDrop}"/>
+                <ListBox Style="{StaticResource DragNDrop}"/>
+                <ListBox Style="{StaticResource DragNDrop}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
