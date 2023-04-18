@@ -17,10 +17,12 @@ C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\refint\Mythodex
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\Mythodex.pdb
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\Mythodex.genruntimeconfig.cache
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\ref\Mythodex.dll
-C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\ViewMain.baml
-C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\ViewMain.g.cs
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\Mythodex_MarkupCompile.lref
 C:\GithubRepositories\Mythodex\Mythodex\bin\Debug\net5.0-windows\GongSolutions.WPF.DragDrop.dll
 C:\GithubRepositories\Mythodex\Mythodex\bin\Debug\net5.0-windows\Microsoft.Expression.Interactions.dll
 C:\GithubRepositories\Mythodex\Mythodex\bin\Debug\net5.0-windows\System.Windows.Interactivity.dll
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\Mythodex.csproj.CopyComplete
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\MainWindow.g.cs
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\MainWindow.baml
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Today.g.cs
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Today.baml

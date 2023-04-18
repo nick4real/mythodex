@@ -1,12 +1,10 @@
-﻿<Window x:Class="Mythodex.ViewMain"
+﻿<Window x:Class="Mythodex.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:local="clr-namespace:Mythodex"
-        xmlns:custom="clr-namespace:Mythodex.ViewModel"
+        xmlns:viewModels="clr-namespace:Mythodex.ViewModel"
+        xmlns:views="clr-namespace:Mythodex.View"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="MainWindow" 
@@ -16,7 +14,7 @@
         ResizeMode="CanResizeWithGrip" 
         AllowsTransparency="True"
         >
-    
+
     <!--Window size & move border-->
     <WindowChrome.WindowChrome>
         <WindowChrome 
@@ -24,9 +22,9 @@
         ResizeBorderThickness="6"
         GlassFrameThickness="0"
         CornerRadius="0"
-        UseAeroCaptionButtons="False"/>  
+        UseAeroCaptionButtons="False"/>
     </WindowChrome.WindowChrome>
-    
+
     <!--Window element styles-->
     <Window.Resources>
         <Style TargetType="Button" x:Key="PanelButton">
@@ -35,23 +33,40 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="30"/>
         </Style>
-        <Style TargetType="ListBox" x:Key="DragNDrop">
+        <Style TargetType="ListBox" x:Key="CustomDragListBox">
+
             <Setter Property="Width" Value="200"/>
             <Setter Property="Margin" Value="20"/>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock FontSize="18" Text="{Binding Path=ItemName}"/>
+                            <TextBlock FontSize="14" Text="{Binding Path=ItemDescription}"/>
+                            <TextBlock FontSize="12" Text="{Binding Path=ItemValue}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="AllowDrop" Value="True"/>
+            <Setter Property="dd:DragDrop.DropTargetAdornerBrush" Value="Coral"/>
+            <Setter Property="dd:DragDrop.IsDragSource" Value="True"/>
+            <Setter Property="dd:DragDrop.IsDropTarget" Value="True"/>
+            <Setter Property="dd:DragDrop.UseDefaultDragAdorner" Value="True"/>
+            <Setter Property="dd:DragDrop.UseDefaultEffectDataTemplate" Value="True"/>
         </Style>
         <Style TargetType="ListBoxItem" x:Key="DragableItem">
             <Setter Property="AllowDrop" Value="True"/>
-            
         </Style>
     </Window.Resources>
-    
+
     <!--Window-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <!--Top bar-->
         <Grid Grid.Row="0" Background="#969696">
             <Label 
@@ -65,6 +80,8 @@
                 Foreground="White"
                 Content="Mythodex"
             />
+            <Button Style="{StaticResource PanelButton}" Margin="0,0,1000,0" Content="Настройки" Width="Auto"/>
+            <Button Style="{StaticResource PanelButton}" Margin="0,0,900,0" Content="Уведомления" Width="Auto"/>
             <Button Style="{StaticResource PanelButton}" Margin="0,0,5,0" Content="X"/>
             <Button Style="{StaticResource PanelButton}" Margin="0,0,40,0" Content="O"/>
             <Button Style="{StaticResource PanelButton}" Margin="0,0,75,0" Content="-"/>
@@ -73,24 +90,33 @@
         <!--Lower grid-->
         <Grid Grid.Row="1" Background="#D4D4D4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto" MinWidth="200" MaxWidth="300"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <!--Side menu-->
-            <Grid Grid.Column="0" Background="#AFAFAF">
+            <Grid Grid.Column="0" 
+                  Background="#AFAFAF">
 
             </Grid>
-            
+
+            <GridSplitter 
+                Grid.Column="1" 
+                Width="5" 
+                Background="DarkGray" 
+                HorizontalAlignment="Left" 
+                Margin="0,0,0,0"
+            />
+
             <!--Main panel-->
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Background="#D4D4D4">
-                <ListBox Style="{StaticResource DragNDrop}" ItemsSource="{Binding DragItems}" ItemContainerStyle="{StaticResource DragableItem}"/>
-                <ListBox Style="{StaticResource DragNDrop}" ItemsSource="{Binding DragItems2}" ItemContainerStyle="{StaticResource DragableItem}"/>
-                <ListBox Style="{StaticResource DragNDrop}" ItemsSource="{Binding DragItems3}" ItemContainerStyle="{StaticResource DragableItem}"/>
-                <ListBox Style="{StaticResource DragNDrop}" ItemsSource="{Binding DragItems4}" ItemContainerStyle="{StaticResource DragableItem}">
-                    
-                </ListBox>
-            </StackPanel>
+            <Grid Grid.Column="2" Background="#D4D4D4" >
+                <Frame x:Name="MainPanelPage"/>
+            </Grid>
+                <!--<ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems}"/>
+                <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems2}"/>
+                <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems3}"/>
+                <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems4}"/>-->
         </Grid>
     </Grid>
 </Window>
