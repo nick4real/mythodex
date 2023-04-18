@@ -1,8 +1,23 @@
 {
   "version": 2,
-  "dgSpecHash": "61uR+EgS4DX6jfNj2+z8pp2nF5cWYxIpP4+2e1u47yvQzgtRXOqy6DtCfn+W5mHLO0gh9ndQLxS9ppPvEaxSlA==",
+  "dgSpecHash": "Kspp0A50lN1wiiJOB5LeA/JCuyKxYv8A2Vce9T4jcABHegq00tCPnYFk29/a76YxlMB9BvO3/xi2JG95gOVL0g==",
   "success": true,
   "projectFilePath": "C:\\GithubRepositories\\Mythodex\\Mythodex\\Mythodex.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "expectedPackageFiles": [
+    "C:\\Users\\nicol\\.nuget\\packages\\gong-wpf-dragdrop\\3.2.1\\gong-wpf-dragdrop.3.2.1.nupkg.sha512",
+    "C:\\Users\\nicol\\.nuget\\packages\\system.windows.interactivity.wpf\\2.0.20525\\system.windows.interactivity.wpf.2.0.20525.nupkg.sha512",
+    "C:\\Users\\nicol\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"System.Windows.Interactivity.WPF 2.0.20525\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \"net5.0-windows7.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "System.Windows.Interactivity.WPF",
+      "targetGraphs": [
+        "net5.0-windows7.0"
+      ]
+    }
+  ]
 }

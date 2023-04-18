@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using Mythodex;
-  
+using System.Windows.Interactivity;
+using Mythodex.ViewModel;
 
 namespace Mythodex
 {
@@ -13,7 +13,7 @@ namespace Mythodex
         {
             InitializeComponent();
 
-            DataContext = new ViewModel.ViewModelMain();
+            DataContext = new ViewModelMain();
         }
     }
 }

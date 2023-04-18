@@ -4,6 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:Mythodex"
+        xmlns:custom="clr-namespace:Mythodex.ViewModel"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="MainWindow" 
         Width="1200"
@@ -34,6 +38,10 @@
         <Style TargetType="ListBox" x:Key="DragNDrop">
             <Setter Property="Width" Value="200"/>
             <Setter Property="Margin" Value="20"/>
+        </Style>
+        <Style TargetType="ListBoxItem" x:Key="DragableItem">
+            <Setter Property="AllowDrop" Value="True"/>
+            
         </Style>
     </Window.Resources>
     
@@ -76,10 +84,12 @@
             
             <!--Main panel-->
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Background="#D4D4D4">
-                <ListBox Style="{StaticResource DragNDrop}"/>
-                <ListBox Style="{StaticResource DragNDrop}"/>
-                <ListBox Style="{StaticResource DragNDrop}"/>
-                <ListBox Style="{StaticResource DragNDrop}"/>
+                <ListBox Style="{StaticResource DragNDrop}" ItemsSource="{Binding DragItems}" ItemContainerStyle="{StaticResource DragableItem}"/>
+                <ListBox Style="{StaticResource DragNDrop}" ItemsSource="{Binding DragItems2}" ItemContainerStyle="{StaticResource DragableItem}"/>
+                <ListBox Style="{StaticResource DragNDrop}" ItemsSource="{Binding DragItems3}" ItemContainerStyle="{StaticResource DragableItem}"/>
+                <ListBox Style="{StaticResource DragNDrop}" ItemsSource="{Binding DragItems4}" ItemContainerStyle="{StaticResource DragableItem}">
+                    
+                </ListBox>
             </StackPanel>
         </Grid>
     </Grid>

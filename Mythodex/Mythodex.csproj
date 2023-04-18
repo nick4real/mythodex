@@ -16,11 +16,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="View\NoirPro-Bold.ttf" />
-    <Resource Include="View\NoirPro-Heavy.ttf" />
-    <Resource Include="View\NoirPro-Italic.ttf" />
-    <Resource Include="View\NoirPro-Light.ttf" />
-    <Resource Include="View\NoirPro-Medium.ttf" />
+    <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\Resources\NoirPro-Bold.ttf" />
+    <Resource Include="View\Resources\NoirPro-Heavy.ttf" />
+    <Resource Include="View\Resources\NoirPro-Italic.ttf" />
+    <Resource Include="View\Resources\NoirPro-Light.ttf" />
+    <Resource Include="View\Resources\NoirPro-Medium.ttf" />
   </ItemGroup>
 
 </Project>
