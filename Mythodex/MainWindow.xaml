@@ -3,13 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels="clr-namespace:Mythodex.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:vm="clr-namespace:Mythodex.ViewModel"
         xmlns:views="clr-namespace:Mythodex.View"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Width="1200"
-        Height="800"
+        Width="1000"
+        MinWidth="1000"
+        Height="600"
+        MinHeight="600"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip" 
         AllowsTransparency="True"
@@ -18,48 +21,14 @@
     <!--Window size & move border-->
     <WindowChrome.WindowChrome>
         <WindowChrome 
-        CaptionHeight="40"
+        CaptionHeight="0"
         ResizeBorderThickness="6"
         GlassFrameThickness="0"
         CornerRadius="0"
-        UseAeroCaptionButtons="False"/>
+        UseAeroCaptionButtons="False">
+        </WindowChrome>
     </WindowChrome.WindowChrome>
-
-    <!--Window element styles-->
-    <Window.Resources>
-        <Style TargetType="Button" x:Key="PanelButton">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="30"/>
-        </Style>
-        <Style TargetType="ListBox" x:Key="CustomDragListBox">
-
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Margin" Value="20"/>
-            <Setter Property="ItemTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock FontSize="18" Text="{Binding Path=ItemName}"/>
-                            <TextBlock FontSize="14" Text="{Binding Path=ItemDescription}"/>
-                            <TextBlock FontSize="12" Text="{Binding Path=ItemValue}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="AllowDrop" Value="True"/>
-            <Setter Property="dd:DragDrop.DropTargetAdornerBrush" Value="Coral"/>
-            <Setter Property="dd:DragDrop.IsDragSource" Value="True"/>
-            <Setter Property="dd:DragDrop.IsDropTarget" Value="True"/>
-            <Setter Property="dd:DragDrop.UseDefaultDragAdorner" Value="True"/>
-            <Setter Property="dd:DragDrop.UseDefaultEffectDataTemplate" Value="True"/>
-        </Style>
-        <Style TargetType="ListBoxItem" x:Key="DragableItem">
-            <Setter Property="AllowDrop" Value="True"/>
-        </Style>
-    </Window.Resources>
-
+    
     <!--Window-->
     <Grid>
         <Grid.RowDefinitions>
@@ -68,27 +37,35 @@
         </Grid.RowDefinitions>
 
         <!--Top bar-->
-        <Grid Grid.Row="0" Background="#969696">
-            <Label 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Center"
-                FontFamily="NoirPro ☞"
-                FontSize="20"
-                FontStyle="Normal" 
-                FontWeight="Normal" 
-                Margin="10,0,0,0" 
-                Foreground="White"
-                Content="Mythodex"
-            />
-            <Button Style="{StaticResource PanelButton}" Margin="0,0,1000,0" Content="Настройки" Width="Auto"/>
-            <Button Style="{StaticResource PanelButton}" Margin="0,0,900,0" Content="Уведомления" Width="Auto"/>
-            <Button Style="{StaticResource PanelButton}" Margin="0,0,5,0" Content="X"/>
-            <Button Style="{StaticResource PanelButton}" Margin="0,0,40,0" Content="O"/>
-            <Button Style="{StaticResource PanelButton}" Margin="0,0,75,0" Content="-"/>
+        <Grid Grid.Row="0" Background="#969696" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+            <Label HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"
+                   FontFamily="NoirPro ☞"
+                   FontSize="20"
+                   FontStyle="Normal" 
+                   FontWeight="Normal" 
+                   Margin="10,0,0,0" 
+                   Foreground="White"
+                   Content="Mythodex" />
+            <Button Style="{StaticResource PanelButton}" Margin="0,0,800,0" Content="Настройки" Width="Auto"/>
+            <Button Style="{StaticResource PanelButton}" Margin="0,0,700,0" Content="Уведомления" Width="Auto"/>
+            
+            <Button Style="{StaticResource PanelButton}" 
+                    Margin="0,0,5,0" 
+                    Content="X"
+                    Command="{Binding CloseCommand}" />
+            <Button Style="{StaticResource PanelButton}" 
+                    Margin="0,0,40,0" 
+                    Content="O"
+                    Command="{Binding MaximizeCommand}" />
+            <Button Style="{StaticResource PanelButton}" 
+                    Margin="0,0,75,0"
+                    Content="-"
+                    Command="{Binding MinimizeCommand}" />
         </Grid>
 
         <!--Lower grid-->
-        <Grid Grid.Row="1" Background="#D4D4D4">
+        <Grid Grid.Row="1" Background="#D4D4D4" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="200" MaxWidth="300"/>
                 <ColumnDefinition Width="5"/>

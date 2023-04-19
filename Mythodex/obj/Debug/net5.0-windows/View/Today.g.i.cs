@@ -53,7 +53,7 @@ namespace Mythodex.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Mythodex;V1.0.0.0;component/view/today.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Mythodex;component/view/today.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\Today.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

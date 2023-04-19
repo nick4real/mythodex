@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Interactivity;
+using System.Windows.Input;
 using Mythodex.View;
 using Mythodex.ViewModel;
 
@@ -16,6 +16,13 @@ namespace Mythodex
 
             DataContext = new ViewModelMain();
             MainPanelPage.Navigate(new Today());
+        }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }

@@ -1,71 +1,86 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Mythodex.Model;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mythodex.Model;
-
+using System.Windows;
+using System.Windows.Input;
 
 namespace Mythodex.ViewModel
 {
     internal class ViewModelMain : INotifyPropertyChanged
     {
-        public ObservableCollection<DragItem> DragItems { get; set; }
-        public ObservableCollection<DragItem> DragItems2 { get; set; }
-        public ObservableCollection<DragItem> DragItems3 { get; set; }
-        public ObservableCollection<DragItem> DragItems4 { get; set; }
-        public ViewModelMain()
+        private ICommand closeCommand;
+        public ICommand CloseCommand
         {
-            DragItems = new ObservableCollection<DragItem>
+            get
             {
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
-            };
-            DragItems2 = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
-            };
-            DragItems3 = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19},
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15}
-            };
-            DragItems4 = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19},
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15}
-            };
-        }
-
-        private DragItem draggedItem;
-        public void StartDrag(DragItem dragItem)
-        {
-            draggedItem = dragItem;
-        }
-        public void StartDrop(DragItem dragItem, ObservableCollection<DragItem> list)
-        {
-            if (draggedItem != null && list != null)
-            {
-                if (list == DragItems)
-                    DragItems.Remove(draggedItem);
-                else if (list == DragItems2)
-                    DragItems2.Remove(draggedItem);
-                else if (list == DragItems3)
-                    DragItems3.Remove(draggedItem);
-                else if (list == DragItems4)
-                    DragItems4.Remove(draggedItem);
-
-                list.Insert(list.IndexOf(dragItem) + 1, draggedItem);
+                if (closeCommand == null)
+                {
+                    closeCommand = new RelayCommand(
+                        param => CloseButton_Click(param, EventArgs.Empty),
+                        param => true
+                    );
+                }
+                return closeCommand;
             }
+        }
 
-            draggedItem = null;
+        private ICommand maximizeCommand;
+        public ICommand MaximizeCommand
+        {
+            get
+            {
+                if (maximizeCommand == null)
+                {
+                    maximizeCommand = new RelayCommand(
+                        param => MaximizeButton_Click(param, EventArgs.Empty),
+                        param => true
+                    );
+                }
+                return maximizeCommand;
+            }
+        }
+
+        private ICommand minimizeCommand;
+        public ICommand MinimizeCommand
+        {
+            get
+            {
+                if (minimizeCommand == null)
+                {
+                    minimizeCommand = new RelayCommand(
+                        param => MinimizeButton_Click(param, EventArgs.Empty),
+                        param => true
+                    );
+                }
+                return minimizeCommand;
+            }
+        }
+
+        private ICommand dragWindowCommand;
+        public ICommand DragWindowCommand
+        {
+            get
+            {
+                return new RelayCommand(param => Application.Current.MainWindow.DragMove());
+            }
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        private void MaximizeButton_Click(object sender, EventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+        }
+        private void MinimizeButton_Click(object sender, EventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+        public void DragWindowLeftMouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.MainWindow.DragMove();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

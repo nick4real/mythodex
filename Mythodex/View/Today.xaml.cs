@@ -13,7 +13,7 @@ namespace Mythodex.View
         {
             InitializeComponent();
 
-            DataContext = new TodayViewModel();
+            DataContext = new ViewModelToday();
         }
     }
 }
