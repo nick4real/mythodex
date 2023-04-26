@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\GithubRepositories\Mythodex\Mythodex\App.xaml
-3-1669502855
+51022125381
 
-11268282752
+13-133744561
 196-1693872391
-MainWindow.xaml;View\CustomWindowButtons.xaml;View\Today.xaml;
+MainWindow.xaml;View\Month.xaml;View\ProjectTemplate.xaml;View\Today.xaml;View\Week.xaml;
 
 True
 

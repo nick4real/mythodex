@@ -4,11 +4,71 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Mythodex.View"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="560" 
+      d:DesignWidth="700"
       Title="Today">
-
-    <Grid>
-        <TextBox Margin="50"></TextBox>
-    </Grid>
+    <Page.Resources>
+        
+    </Page.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden" 
+                  HorizontalScrollBarVisibility="Hidden" >
+        <StackPanel Margin="0,0,0,0"
+                    Height="Auto"
+                    Width="600" >
+            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, 
+                       StringFormat='Сегодня {0:D}',
+                       ConverterCulture=ru-RU}" 
+                       Foreground="White"
+                       HorizontalAlignment="Center" />
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Lorem ipsum"
+                           Height="80"
+                           Width="400"
+                           Background="DarkGray"
+                           Margin="5"/>
+                <TextBlock Text="Lorem ipsum"
+                           Height="80"
+                           Width="400"
+                           Background="DarkGray"
+                           Margin="5"/>
+                <TextBlock Text="Lorem ipsum"
+                           Height="80"
+                           Width="400"
+                           Background="DarkGray"
+                           Margin="5"/>
+                <TextBlock Text="Lorem ipsum"
+                           Height="80"
+                           Width="400"
+                           Background="DarkGray"
+                           Margin="5"/>
+                <TextBlock Text="Lorem ipsum"
+                           Height="80"
+                           Width="400"
+                           Background="DarkGray"
+                           Margin="5"/>
+                <TextBlock Text="Lorem ipsum"
+                           Height="80"
+                           Width="400"
+                           Background="DarkGray"
+                           Margin="5"/>
+                <TextBlock Text="Lorem ipsum"
+                           Height="80"
+                           Width="400"
+                           Background="DarkGray"
+                           Margin="5"/>
+                <TextBlock Text="Lorem ipsum"
+                           Height="80"
+                           Width="400"
+                           Background="DarkGray"
+                           Margin="5"/>
+                <Button Content="Новая задача"
+                        Height="50"
+                        Width="180"
+                        Background="DarkGray"
+                        Margin="5"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

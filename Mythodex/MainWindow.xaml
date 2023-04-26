@@ -28,7 +28,33 @@
         UseAeroCaptionButtons="False">
         </WindowChrome>
     </WindowChrome.WindowChrome>
-    
+
+    <!--Window element styles-->
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}" x:Key="CustomMenuUpperFont">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="NoirPro ☞" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Content" Value="Mythodex" />
+        </Style>
+        <Style TargetType="{x:Type Label}" x:Key="CustomMenuLowerFont">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="NoirPro ☞" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Content" Value="Mythodex" />
+        </Style>
+    </Window.Resources>
+
     <!--Window-->
     <Grid>
         <Grid.RowDefinitions>
@@ -73,10 +99,49 @@
             </Grid.ColumnDefinitions>
 
             <!--Side menu-->
-            <Grid Grid.Column="0" 
-                  Background="#AFAFAF">
-
-            </Grid>
+            <StackPanel Grid.Column="0" 
+                        Orientation="Vertical"
+                        Background="#AFAFAF">
+                <TextBlock Height="30"
+                           Width="Auto"
+                           Margin="0,30,0,0">
+                    <Label Content="Календарь"
+                           Style="{StaticResource CustomMenuUpperFont}"
+                           Margin="30,0,0,0"/>
+                </TextBlock>
+                <Button Width="Auto"
+                        Content="Сегодня"
+                        Height="30" 
+                        Command="{Binding OpenPageCommand}" 
+                        CommandParameter="Today" />
+                <Button Width="Auto"
+                        Content="Неделя"
+                        Height="30" 
+                        Command="{Binding OpenPageCommand}" 
+                        CommandParameter="Week" />
+                <Button Width="Auto"
+                        Content="Месяц"
+                        Height="30"
+                        Command="{Binding OpenPageCommand}" 
+                        CommandParameter="Month" />
+                <TextBlock Height="30"
+                           Width="Auto"
+                           Margin="0,20,0,0">
+                    <Label Content="Проекты"
+                           Style="{StaticResource CustomMenuUpperFont}"
+                           Margin="30,0,0,0"/>
+                </TextBlock>
+                <Button Width="Auto"
+                        Content="Проект1"
+                        Height="30" />
+                <Button Width="Auto"
+                        Content="Проект2"
+                        Height="30" />
+                <Button Width="30"
+                        Content="+"
+                        Height="30" 
+                        Command="{Binding NewProjectCommand}"/>
+            </StackPanel>
 
             <GridSplitter 
                 Grid.Column="1" 
@@ -88,7 +153,7 @@
 
             <!--Main panel-->
             <Grid Grid.Column="2" Background="#D4D4D4" >
-                <Frame x:Name="MainPanelPage"/>
+                <Frame x:Name="MainPanelPage" DataContext="{Binding}"/>
             </Grid>
                 <!--<ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems}"/>
                 <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems2}"/>

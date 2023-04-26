@@ -7,9 +7,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="View\CustomWindowButtons.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\Today.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -18,7 +15,13 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomWindowButtons.xaml">
+    <Page Update="View\Month.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ProjectTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Week.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Today.xaml">

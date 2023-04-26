@@ -13,9 +13,9 @@ namespace Mythodex
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = new ViewModelMain();
-            MainPanelPage.Navigate(new Today());
+             
+            DataContext = new ViewModelMain(MainPanelPage);
+            //MainPanelPage.Navigate(new Today());
         }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

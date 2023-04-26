@@ -3,12 +3,20 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace Mythodex.ViewModel
 {
     internal class ViewModelMain : INotifyPropertyChanged
     {
+        private Frame mainPanelPage;
+        public ViewModelMain(Frame frame)
+        {
+            mainPanelPage = frame;
+            mainPanelPage.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+        }
         private ICommand closeCommand;
         public ICommand CloseCommand
         {
@@ -57,12 +65,35 @@ namespace Mythodex.ViewModel
             }
         }
 
-        private ICommand dragWindowCommand;
-        public ICommand DragWindowCommand
+        private ICommand openPageCommand;
+        public ICommand OpenPageCommand
         {
             get
             {
-                return new RelayCommand(param => Application.Current.MainWindow.DragMove());
+                return openPageCommand ?? (openPageCommand = new RelayCommand(param =>
+                {
+                    if (param != null && param is string viewPath)
+                    {
+                        var uri = new Uri($"View/{viewPath}.xaml", UriKind.Relative);
+                        mainPanelPage.NavigationService.Navigate(uri);
+                    }
+                }));
+            }
+        }
+
+        private ICommand newProjectCommand;
+        public ICommand NewProjectCommand
+        {
+            get
+            {
+                return newProjectCommand ?? (newProjectCommand = new RelayCommand(param =>
+                {
+                    if (param != null && param is string viewPath)
+                    {
+                        var uri = new Uri($"View/{viewPath}.xaml", UriKind.Relative);
+                        mainPanelPage.NavigationService.Navigate(uri);
+                    }
+                }));
             }
         }
 
@@ -72,7 +103,11 @@ namespace Mythodex.ViewModel
         }
         private void MaximizeButton_Click(object sender, EventArgs e)
         {
-            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            var WindowState = Application.Current.MainWindow.WindowState;
+            if (WindowState == WindowState.Normal)
+                Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            else
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
         }
         private void MinimizeButton_Click(object sender, EventArgs e)
         {

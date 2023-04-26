@@ -26,7 +26,10 @@ C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\MainWindow.baml
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Today.g.cs
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Today.baml
-C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\CustomWindowButtons.g.cs
-C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\CustomWindowButtons.baml
-C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\App.baml
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Month.g.cs
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\ProjectTemplate.g.cs
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Week.g.cs
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Month.baml
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\ProjectTemplate.baml
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Week.baml
