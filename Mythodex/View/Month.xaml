@@ -19,55 +19,7 @@
                     Width="600"
                     
                     Background="DarkSlateGray" >
-            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, 
-                StringFormat='Сегодня {0:D}',
-                ConverterCulture=ru-RU}" 
-                       Foreground="White"
-                       HorizontalAlignment="Center" />
-            <StackPanel Height="Auto"
-                        Background="Bisque" 
-                        Orientation="Horizontal">
-                <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-            </StackPanel>
-            <ScrollViewer VerticalScrollBarVisibility="Disabled" 
-                          HorizontalScrollBarVisibility="Hidden"
-                          PreviewMouseWheel="StackPanel_PreviewMouseWheel" 
-                          Background="CornflowerBlue" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                    <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                    <TextBlock Text="Lorem ipsum"
-                               Height="200"
-                               Background="Aqua"
-                               Width="200"
-                               Margin="5"/>
-                    <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                </StackPanel>
-            </ScrollViewer>
+            
         </StackPanel>
     </ScrollViewer>
 </Page>

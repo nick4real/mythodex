@@ -33,3 +33,4 @@ C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Week.g.cs
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Month.baml
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\ProjectTemplate.baml
 C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\View\Week.baml
+C:\GithubRepositories\Mythodex\Mythodex\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs

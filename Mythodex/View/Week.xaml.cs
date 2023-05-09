@@ -22,9 +22,11 @@ namespace Mythodex.View
             if (e.Delta > 0)
             {
                 scrollViewer.LineLeft();
+                scrollViewer.LineLeft();
             }
             else if (e.Delta < 0)
             {
+                scrollViewer.LineRight();
                 scrollViewer.LineRight();
             }
 
