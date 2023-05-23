@@ -8,60 +8,23 @@ using System.Windows.Input;
 
 namespace Mythodex.ViewModel
 {
-    internal class ViewModelMonth : INotifyPropertyChanged
+    public class ViewModelMonth : INotifyPropertyChanged
     {
-        public ObservableCollection<DragItem> DragItems { get; set; }
-        public ObservableCollection<DragItem> DragItems2 { get; set; }
-        public ObservableCollection<DragItem> DragItems3 { get; set; }
-        public ObservableCollection<DragItem> DragItems4 { get; set; }
-        public ViewModelMonth()
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
         {
-            DragItems = new ObservableCollection<DragItem>
+            get { return _selectedDate; }
+            set
             {
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
-            };
-            DragItems2 = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
-            };
-            DragItems3 = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19},
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15}
-            };
-            DragItems4 = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19},
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15}
-            };
-        }
+                _selectedDate = value;
 
-        private ICommand newTaskCommand;
-        public ICommand NewTaskCommand
-        {
-            get
-            {
-                if (newTaskCommand == null)
-                {
-                    newTaskCommand = new RelayCommand(
-                        param => NewTask_Click(param, EventArgs.Empty),
-                        param => true
-                    );
-                }
-                return newTaskCommand;
             }
         }
-
-        private void NewTask_Click(object sender, EventArgs e)
+        public ViewModelMonth()
         {
-            DragItems.Add(new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19 });
+            
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

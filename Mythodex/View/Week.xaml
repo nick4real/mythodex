@@ -32,23 +32,32 @@
         <Style TargetType="{x:Type ListBox}" x:Key="WeekGridListBoxStyle" >
             <Setter Property="Margin" Value="0"/>
             <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
             <Setter Property="dd:DragDrop.IsDragSource" Value="True"/>
             <Setter Property="dd:DragDrop.IsDropTarget" Value="True"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Border Margin="5" 
+                        <Border Margin="5"
+                                HorizontalAlignment="Stretch"
                                 BorderThickness="1" 
                                 BorderBrush="SteelBlue" 
                                 CornerRadius="4">
                             <TextBlock Text="{Binding Path=ItemName}"
+                                       
+                                       TextWrapping="WrapWithOverflow"
                                        Height="60"/>
                         </Border>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <Style TargetType="{x:Type Button}" x:Key="AddTaskButtonStyle">
+            <Setter Property="Command" Value="{Binding NewTaskCommand}" />
+            <Setter Property="Grid.Row" Value="2" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Content" Value="+" />
+        </Style>
     </Page.Resources>
     <Grid>
         <StackPanel Height="Auto" 
@@ -64,7 +73,7 @@
                 <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, 
                        StringFormat='Сегодня {0:D}',
                        ConverterCulture=ru-RU}" 
-                       Foreground="White"
+                       Foreground="Black"
                        HorizontalAlignment="Center" />
                 <Button Content="R" 
                         Width="20" 
@@ -81,6 +90,7 @@
                             RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, 
                             Converter={StaticResource MaxHeightConverter},
                             ConverterParameter={StaticResource MaxHeightCalebrate}}" >
+                    <!-- Monday -->
                     <Grid Style="{StaticResource WeekGridStyle}" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
@@ -92,11 +102,12 @@
                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
                                  Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding DragItems}">
+                                 ItemsSource="{Binding MondayItems}">
                         </ListBox>
-                        <Button Grid.Row="2"
-                                Margin="5" />
+                        <Button Style="{StaticResource AddTaskButtonStyle}"
+                                CommandParameter="MondayItems"/>
                     </Grid>
+                    <!-- Tuesday -->
                     <Grid Style="{StaticResource WeekGridStyle}" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
@@ -108,10 +119,11 @@
                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
                                  Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding DragItems2}" />
-                        <Button Grid.Row="2"
-                                Margin="5" />
+                                 ItemsSource="{Binding TuesdayItems}" />
+                        <Button Style="{StaticResource AddTaskButtonStyle}"
+                                CommandParameter="TuesdayItems"/>
                     </Grid>
+                    <!-- Wednesday -->
                     <Grid Style="{StaticResource WeekGridStyle}" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
@@ -121,12 +133,13 @@
                         <Label Content="Среда"
                                Grid.Row="0"
                                HorizontalAlignment="Center" />
-                        <ListBox Grid.Row="1" 
+                        <ListBox Grid.Row="1"
                                  Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding DragItems3}" />
-                        <Button Grid.Row="2"
-                                Margin="5" />
+                                 ItemsSource="{Binding WednesdayItems}" />
+                        <Button Style="{StaticResource AddTaskButtonStyle}"
+                                CommandParameter="WednesdayItems"/>
                     </Grid>
+                    <!-- Thursday -->
                     <Grid Style="{StaticResource WeekGridStyle}" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
@@ -138,10 +151,11 @@
                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
                                  Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding DragItems4}" />
-                        <Button Grid.Row="2"
-                                Margin="5" />
+                                 ItemsSource="{Binding ThursdayItems}" />
+                        <Button Style="{StaticResource AddTaskButtonStyle}"
+                                CommandParameter="ThursdayItems"/>
                     </Grid>
+                    <!-- Friday -->
                     <Grid Style="{StaticResource WeekGridStyle}" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
@@ -153,10 +167,11 @@
                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
                                  Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding DragItems3}" />
-                        <Button Grid.Row="2"
-                                Margin="5" />
+                                 ItemsSource="{Binding FridayItems}" />
+                        <Button Style="{StaticResource AddTaskButtonStyle}"
+                                CommandParameter="FridayItems"/>
                     </Grid>
+                    <!-- Saturday -->
                     <Grid Style="{StaticResource WeekGridStyle}" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
@@ -168,10 +183,11 @@
                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
                                  Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding DragItems2}" />
-                        <Button Grid.Row="2"
-                                Margin="5" />
+                                 ItemsSource="{Binding SaturdayItems}" />
+                        <Button Style="{StaticResource AddTaskButtonStyle}"
+                                CommandParameter="SaturdayItems"/>
                     </Grid>
+                    <!-- Sunday -->
                     <Grid Style="{StaticResource WeekGridStyle}" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
@@ -183,9 +199,9 @@
                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
                                  Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding DragItems}" />
-                        <Button Grid.Row="2"
-                                Margin="5" />
+                                 ItemsSource="{Binding SundayItems}" />
+                        <Button Style="{StaticResource AddTaskButtonStyle}"
+                                CommandParameter="SundayItems"/>
                     </Grid>
                 </StackPanel>
             </ScrollViewer>

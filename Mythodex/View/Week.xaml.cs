@@ -14,7 +14,7 @@ namespace Mythodex.View
         {
             InitializeComponent();
 
-            DataContext = new ViewModelToday();
+            DataContext = new ViewModelWeek();
         }
         private void StackPanel_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {

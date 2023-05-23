@@ -31,6 +31,20 @@
 
     <!--Window element styles-->
     <Window.Resources>
+        <LinearGradientBrush x:Key="BGK2" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#2e6b41" Offset="0" />
+            <GradientStop Color="#558263" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="BGK" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="PeachPuff" Offset="0" />
+            <GradientStop Color="PapayaWhip" Offset="1" />
+        </LinearGradientBrush>
+        <Style TargetType="Button" x:Key="PanelButton">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="30"/>
+        </Style>
         <Style TargetType="{x:Type Label}" x:Key="CustomMenuUpperFont">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -56,14 +70,14 @@
     </Window.Resources>
 
     <!--Window-->
-    <Grid>
+    <Grid Background="{StaticResource BGK}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--Top bar-->
-        <Grid Grid.Row="0" Background="#969696" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        <Grid Grid.Row="0" Background="#50000000" MouseLeftButtonDown="Window_MouseLeftButtonDown">
             <Label HorizontalAlignment="Left" 
                    VerticalAlignment="Center"
                    FontFamily="NoirPro ☞"
@@ -75,7 +89,7 @@
                    Content="Mythodex" />
             <Button Style="{StaticResource PanelButton}" Margin="0,0,800,0" Content="Настройки" Width="Auto"/>
             <Button Style="{StaticResource PanelButton}" Margin="0,0,700,0" Content="Уведомления" Width="Auto"/>
-            
+
             <Button Style="{StaticResource PanelButton}" 
                     Margin="0,0,5,0" 
                     Content="X"
@@ -91,17 +105,18 @@
         </Grid>
 
         <!--Lower grid-->
-        <Grid Grid.Row="1" Background="#D4D4D4" >
+        <Grid Grid.Row="1" Background="#00000000" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="200" MaxWidth="300"/>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="571*"/>
+                <ColumnDefinition Width="224*"/>
             </Grid.ColumnDefinitions>
 
             <!--Side menu-->
             <StackPanel Grid.Column="0" 
                         Orientation="Vertical"
-                        Background="#AFAFAF">
+                        Background="#40000000">
                 <TextBlock Height="30"
                            Width="Auto"
                            Margin="0,30,0,0">
@@ -146,16 +161,15 @@
             <GridSplitter 
                 Grid.Column="1" 
                 Width="5" 
-                Background="DarkGray" 
-                HorizontalAlignment="Left" 
-                Margin="0,0,0,0"
+                Background="#79000000" 
+                HorizontalAlignment="Center"
             />
 
             <!--Main panel-->
-            <Grid Grid.Column="2" Background="#D4D4D4" >
+            <Grid Grid.Column="2" Background="#30000000" Grid.ColumnSpan="2" >
                 <Frame x:Name="MainPanelPage" DataContext="{Binding}"/>
             </Grid>
-                <!--<ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems}"/>
+            <!--<ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems}"/>
                 <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems2}"/>
                 <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems3}"/>
                 <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems4}"/>-->

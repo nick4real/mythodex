@@ -14,29 +14,134 @@
     <Page.Resources>
         <vm:MaxHeightConverter x:Key="MaxHeightConverter"/>
         <sys:Int32 x:Key="MaxHeightCalebrate">80</sys:Int32>
+        <Style TargetType="{x:Type TextBox}" x:Key="ItemNameTextBox">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="NoirPro ☞" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="IsReadOnly" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="ItemDescriptionTextBox">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="NoirPro ☞" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Light" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="IsReadOnly" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="CompleteFlagButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="Transparent">
+                            <Path x:Name="Pt" Data="M0,0 M0.2,0.2 L 0.8,0.8 M0.2,0.8 L0.8,0.2 M1,1"
+                      Stretch="Uniform" Stroke="Black" StrokeThickness="2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="Red"/>
+                                <Setter TargetName="Pt" Property="Stroke" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="{x:Type ListBox}" x:Key="TodayListBoxStyle" >
             <Setter Property="Margin" Value="0"/>
             <Setter Property="dd:DragDrop.IsDragSource" Value="True"/>
             <Setter Property="dd:DragDrop.IsDropTarget" Value="True"/>
             <Setter Property="dd:DragDrop.UseDefaultDragAdorner" Value="True"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            BorderThickness="0"
+                                            Padding="0">
+                                        <ContentPresenter />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Border Margin="5" 
-                                BorderThickness="1" 
-                                BorderBrush="SteelBlue" 
-                                CornerRadius="4" >
-                            <TextBlock Text="{Binding Path=ItemName}"
-                                       Height="60"
-                                       Width="200"/>
-                        </Border>
+                        <Grid Width="588"
+                              Margin="0,15,0,0"
+                              Background="Transparent"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0"
+                                  Margin="0,0,0,5"
+                                  Height="Auto" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Height="20"
+                                        Width="20"
+                                        Margin="0,5,0,0"
+                                        Style="{StaticResource CompleteFlagButton}"
+                                        IsHitTestVisible="True"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Stretch"
+                                        Grid.Column="0" />
+                                
+                                <StackPanel Grid.Column="1"
+                                            Height="Auto">
+                                    <TextBox Text="{Binding Path=ItemName}" 
+                                             Style="{StaticResource ItemNameTextBox}"/>
+                                    <TextBox Text="{Binding Path=ItemDescription}"
+                                             Style="{StaticResource ItemDescriptionTextBox}"/>
+                                </StackPanel>
+                                <Button Height="20"
+                                        Width="20"
+                                        Margin="0,0,0,5"
+                                        IsHitTestVisible="True"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Left"
+                                        Grid.Column="2" >
+
+                                </Button>
+                            </Grid>
+                            <Rectangle VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Stretch"
+                                       Height="2"
+                                       Fill="DarkGray"
+                                       Grid.Row="1"/>
+                        </Grid>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
             <Setter Property="ItemContainerStyle">
                 <Setter.Value>
                     <Style TargetType="ListBoxItem">
-                        <Setter Property="IsHitTestVisible" Value="False"/>
+                        <Setter Property="IsHitTestVisible" Value="True"/>
                     </Style>
                 </Setter.Value>
             </Setter>
@@ -54,20 +159,21 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-            
-            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, 
-                   StringFormat='Сегодня {0:D}',
-                   ConverterCulture=ru-RU}" 
-                   Foreground="White"
-                   Grid.Row="0"
-                   HorizontalAlignment="Center" />
 
+            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, 
+                       StringFormat='Сегодня {0:D}',
+                       ConverterCulture=ru-RU}" 
+                       Foreground="Black"
+                       Grid.Row="0"
+                       HorizontalAlignment="Center" />
             <ListBox Height="Auto"
                      Grid.Row="1" 
                      ScrollViewer.CanContentScroll="False"
                      Background="Transparent"
                      BorderThickness="0"
                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     
                      Style="{StaticResource TodayListBoxStyle}"
                      ItemsSource="{Binding DragItems}" 
                      MaxHeight="{Binding 
@@ -79,8 +185,7 @@
             <Button Content="Новая задача"
                     Height="50"
                     Width="180"
-                    Grid.Row="2" 
-                    Background="DarkGray"
+                    Grid.Row="2"
                     Command="{Binding NewTaskCommand}"
                     VerticalAlignment="Bottom"
                     Margin="5" />

@@ -14,6 +14,14 @@
           }
         }
       },
+      "Lorem.NET/1.0.6": {
+        "runtime": {
+          "lib/net40/LoremNET.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "System.Windows.Interactivity.WPF/2.0.20525": {
         "runtime": {
           "lib/net40/Microsoft.Expression.Interactions.dll": {
@@ -35,6 +43,13 @@
       "sha512": "sha512-duqBiOHQobupqRdbLYcr+8BQeeuHkvPDHQs9lnLZ03sYkmJbk5ApXqgUfx7hPP7tN9qopFQKl6OlYIHixnI1iw==",
       "path": "gong-wpf-dragdrop/3.2.1",
       "hashPath": "gong-wpf-dragdrop.3.2.1.nupkg.sha512"
+    },
+    "Lorem.NET/1.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Td4zjQanubIpsTXX5YuafC7kgr7bcFbSewAbMuHdyIddkssUQ1Bc0o846Fr4WybZ2y9GRI9RLej6VBPZAHGwOw==",
+      "path": "lorem.net/1.0.6",
+      "hashPath": "lorem.net.1.0.6.nupkg.sha512"
     },
     "System.Windows.Interactivity.WPF/2.0.20525": {
       "type": "package",

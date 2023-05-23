@@ -1,4 +1,5 @@
 ﻿using Mythodex.Model;
+using LoremNET;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,30 +17,10 @@ namespace Mythodex.ViewModel
         public ObservableCollection<DragItem> DragItems4 { get; set; }
         public ViewModelToday()
         {
-            DragItems = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
-            };
-            DragItems2 = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15},
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19}
-            };
-            DragItems3 = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19},
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15}
-            };
-            DragItems4 = new ObservableCollection<DragItem>
-            {
-                new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19},
-                new DragItem { ItemName = "Alpha", ItemDescription = "Typical Desc", ItemValue = 13},
-                new DragItem { ItemName = "Beta", ItemDescription = "Basic Desc", ItemValue = 15}
-            };
+            DragItems = DragItemGenerator.Next(10);
+            DragItems2 = DragItemGenerator.Next(3);
+            DragItems3 = DragItemGenerator.Next(3);
+            DragItems4 = DragItemGenerator.Next(3);
         }
 
         private ICommand newTaskCommand;
@@ -60,7 +41,7 @@ namespace Mythodex.ViewModel
 
         private void NewTask_Click(object sender, EventArgs e)
         {
-            DragItems.Add(new DragItem { ItemName = "Delta", ItemDescription = "Common Desc", ItemValue = 19 });
+            DragItems.Add(new DragItem { ItemName = Lorem.Sentence(8), ItemDescription = Lorem.Sentence(20), ItemValue = 19 });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -47,11 +47,12 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Mythodex.ViewModel.ViewModelToday" BaseTypeListCollapsed="true">
+  <Class Name="Mythodex.ViewModel.ViewModelWeek" BaseTypeListCollapsed="true">
     <Position X="0.75" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAQAAAgAAAAAAAAIBBAAAAAAA=</HashCode>
-      <FileName>ViewModel\ViewModelToday.cs</FileName>
+      <HashCode>AAAAABAAIAQAAAQQIAAAAABAgAAAAYYAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\ViewModelWeek.cs</FileName>
+      <NewMemberFileName>ViewModel\ViewModelToday.cs</NewMemberFileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>

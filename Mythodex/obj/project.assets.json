@@ -14,6 +14,15 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
+      "Lorem.NET/1.0.6": {
+        "type": "package",
+        "compile": {
+          "lib/net40/LoremNET.dll": {}
+        },
+        "runtime": {
+          "lib/net40/LoremNET.dll": {}
+        }
+      },
       "System.Windows.Interactivity.WPF/2.0.20525": {
         "type": "package",
         "compile": {
@@ -53,6 +62,18 @@
         "lib/netcoreapp3.1/GongSolutions.WPF.DragDrop.xml"
       ]
     },
+    "Lorem.NET/1.0.6": {
+      "sha512": "Td4zjQanubIpsTXX5YuafC7kgr7bcFbSewAbMuHdyIddkssUQ1Bc0o846Fr4WybZ2y9GRI9RLej6VBPZAHGwOw==",
+      "type": "package",
+      "path": "lorem.net/1.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/LoremNET.dll",
+        "lorem.net.1.0.6.nupkg.sha512",
+        "lorem.net.nuspec"
+      ]
+    },
     "System.Windows.Interactivity.WPF/2.0.20525": {
       "sha512": "0r+Le4E7hCm4zToUvBzjSUyTcuU3rFeoPa7JyTdWIzR/F7wH6+O/pWkjHIG40hIA0z1wvRdZayvoizA4wcK1dg==",
       "type": "package",
@@ -71,6 +92,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
+      "Lorem.NET >= 1.0.6",
       "System.Windows.Interactivity.WPF >= 2.0.20525",
       "gong-wpf-dragdrop >= 3.2.1"
     ]
@@ -114,6 +136,10 @@
       "net5.0-windows7.0": {
         "targetAlias": "net5.0-windows",
         "dependencies": {
+          "Lorem.NET": {
+            "target": "Package",
+            "version": "[1.0.6, )"
+          },
           "System.Windows.Interactivity.WPF": {
             "target": "Package",
             "version": "[2.0.20525, )"
@@ -152,6 +178,16 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Lorem.NET 1.0.6\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \"net5.0-windows7.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Lorem.NET",
+      "targetGraphs": [
+        "net5.0-windows7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

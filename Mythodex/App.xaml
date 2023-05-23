@@ -28,12 +28,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            <Style TargetType="Button" x:Key="PanelButton">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="HorizontalAlignment" Value="Right"/>
-                <Setter Property="Height" Value="30"/>
-                <Setter Property="Width" Value="30"/>
-            </Style>
+            
             <Style TargetType="ListBox" x:Key="CustomDragListBox">
                 <Setter Property="Width" Value="200"/>
                 <Setter Property="Margin" Value="20"/>
