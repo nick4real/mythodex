@@ -13,8 +13,14 @@ namespace Mythodex.View
         public Month()
         {
             InitializeComponent();
-
+            
             DataContext = new ViewModelMonth();
+        }
+        public Month(Frame frame)
+        {
+            InitializeComponent();
+
+            DataContext = new ViewModelMonth(frame);
         }
         private void StackPanel_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {

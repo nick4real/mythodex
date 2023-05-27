@@ -1,7 +1,9 @@
 ﻿using Mythodex.Model;
+using Mythodex.View;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,6 +18,8 @@ namespace Mythodex.ViewModel
         {
             mainPanelPage = frame;
             mainPanelPage.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+
+            ApplicationPaths.Check();
         }
         private ICommand closeCommand;
         public ICommand CloseCommand
@@ -74,9 +78,16 @@ namespace Mythodex.ViewModel
                 {
                     if (param != null && param is string viewPath)
                     {
+                        if (viewPath == "Month")
+                            mainPanelPage.Navigate(new Month(mainPanelPage));
+                        else
+                        {
+
                         var uri = new Uri($"View/{viewPath}.xaml", UriKind.Relative);
                         mainPanelPage.NavigationService.Navigate(uri);
+                        }
                     }
+
                 }));
             }
         }

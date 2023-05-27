@@ -5,57 +5,12 @@
              xmlns:dd="urn:gong-wpf-dragdrop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
-            <Style TargetType="{x:Type Button}" x:Key="CustomWindowButtonStyle">
-                <Setter Property="Padding" Value="5,2" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="Background" Value="#3F3F46" />
-                <Setter Property="BorderBrush" Value="#3F3F46" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#5E5E64" />
-                        <Setter Property="BorderBrush" Value="#5E5E64" />
-                    </Trigger>
-                </Style.Triggers>
+        
+            <Style TargetType="Control">
+                <Setter Property="FontFamily" Value="NoirPro ☞" />
+                <Setter Property="FontStyle" Value="Italic" />
+
             </Style>
-            
-            <Style TargetType="ListBox" x:Key="CustomDragListBox">
-                <Setter Property="Width" Value="200"/>
-                <Setter Property="Margin" Value="20"/>
-                <Setter Property="ItemTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock FontSize="18" Text="{Binding Path=ItemName}"/>
-                                <TextBlock FontSize="14" Text="{Binding Path=ItemDescription}"/>
-                                <TextBlock FontSize="12" Text="{Binding Path=ItemValue}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="AllowDrop" Value="True"/>
-                <Setter Property="dd:DragDrop.DropTargetAdornerBrush" Value="Coral"/>
-                <Setter Property="dd:DragDrop.IsDragSource" Value="True"/>
-                <Setter Property="dd:DragDrop.IsDropTarget" Value="True"/>
-                <Setter Property="dd:DragDrop.UseDefaultDragAdorner" Value="True"/>
-                <Setter Property="dd:DragDrop.UseDefaultEffectDataTemplate" Value="True"/>
-            </Style>
-            <Style TargetType="ListBoxItem" x:Key="DragableItem">
-                <Setter Property="AllowDrop" Value="True"/>
-            </Style>
-            <Style TargetType="{x:Type ScrollViewer}" x:Key="CustomScrollViewer">
-                <Setter Property="Background" Value="Green"/>
-            </Style>
-        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

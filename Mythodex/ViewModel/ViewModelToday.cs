@@ -11,16 +11,29 @@ namespace Mythodex.ViewModel
 {
     internal class ViewModelToday : INotifyPropertyChanged
     {
-        public ObservableCollection<DragItem> DragItems { get; set; }
-        public ObservableCollection<DragItem> DragItems2 { get; set; }
-        public ObservableCollection<DragItem> DragItems3 { get; set; }
-        public ObservableCollection<DragItem> DragItems4 { get; set; }
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
+        {
+            get { return _selectedDate; }
+            set
+            {
+                _selectedDate = value;
+                OnPropertyChanged(nameof(SelectedDate));
+            }
+        }
+        public ObservableCollection<Task> DragItems { get; set; }
+
         public ViewModelToday()
         {
-            DragItems = DragItemGenerator.Next(10);
-            DragItems2 = DragItemGenerator.Next(3);
-            DragItems3 = DragItemGenerator.Next(3);
-            DragItems4 = DragItemGenerator.Next(3);
+            DragItems = TaskLipsumGenerator.Next(10);
+
+            SelectedDate = DateTime.Now;
+        }
+        public ViewModelToday(DateTime dateTime)
+        {
+            DragItems = TaskLipsumGenerator.Next(10);
+
+            SelectedDate = dateTime;
         }
 
         private ICommand newTaskCommand;
@@ -38,10 +51,30 @@ namespace Mythodex.ViewModel
                 return newTaskCommand;
             }
         }
-
+        private ICommand dateSwitchCommand;
+        public ICommand DateSwitchCommand
+        {
+            get
+            {
+                if (dateSwitchCommand == null)
+                {
+                    dateSwitchCommand = new RelayCommand(
+                        param => DateSwitch_Click(param, EventArgs.Empty),
+                        param => true
+                    );
+                }
+                return dateSwitchCommand;
+            }
+        }
+        private void DateSwitch_Click(object sender, EventArgs e)
+        {
+            if ((string)sender == "1")
+                SelectedDate = SelectedDate.AddDays(1);
+            else SelectedDate = SelectedDate.AddDays(-1);
+        }
         private void NewTask_Click(object sender, EventArgs e)
         {
-            DragItems.Add(new DragItem { ItemName = Lorem.Sentence(8), ItemDescription = Lorem.Sentence(20), ItemValue = 19 });
+            DragItems.Add(TaskLipsumGenerator.Next());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

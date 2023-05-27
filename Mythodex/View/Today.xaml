@@ -14,7 +14,7 @@
     <Page.Resources>
         <vm:MaxHeightConverter x:Key="MaxHeightConverter"/>
         <sys:Int32 x:Key="MaxHeightCalebrate">80</sys:Int32>
-        <Style TargetType="{x:Type TextBox}" x:Key="ItemNameTextBox">
+        <Style TargetType="{x:Type TextBox}" x:Key="TitleTextBox">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="NoirPro ☞" />
@@ -28,7 +28,7 @@
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="IsReadOnly" Value="True" />
         </Style>
-        <Style TargetType="{x:Type TextBox}" x:Key="ItemDescriptionTextBox">
+        <Style TargetType="{x:Type TextBox}" x:Key="DescriptionTextBox">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="NoirPro ☞" />
@@ -114,10 +114,10 @@
                                 
                                 <StackPanel Grid.Column="1"
                                             Height="Auto">
-                                    <TextBox Text="{Binding Path=ItemName}" 
-                                             Style="{StaticResource ItemNameTextBox}"/>
-                                    <TextBox Text="{Binding Path=ItemDescription}"
-                                             Style="{StaticResource ItemDescriptionTextBox}"/>
+                                    <TextBox Text="{Binding Path=Title}" 
+                                             Style="{StaticResource TitleTextBox}"/>
+                                    <TextBox Text="{Binding Path=Description}"
+                                             Style="{StaticResource DescriptionTextBox}"/>
                                 </StackPanel>
                                 <Button Height="20"
                                         Width="20"
@@ -159,13 +159,29 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
-
-            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, 
-                       StringFormat='Сегодня {0:D}',
-                       ConverterCulture=ru-RU}" 
-                       Foreground="Black"
-                       Grid.Row="0"
-                       HorizontalAlignment="Center" />
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Grid.Row="0">
+                <Button Content="L" 
+                        Width="20"
+                        Margin="0,0,10,0" 
+                        Command="{Binding DateSwitchCommand}"
+                        CommandParameter="0" />
+                <TextBlock Text="{Binding SelectedDate, 
+                           StringFormat=' {0:D}',
+                           ConverterCulture=ru-RU}" 
+                           Foreground="Black"
+                           Grid.Row="0"
+                           Width="200"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center" />
+                <Button Content="R" 
+                        Width="20" 
+                        Margin="10,0,0,0" 
+                        Command="{Binding DateSwitchCommand}"
+                        CommandParameter="1" />
+            </StackPanel>
+            
             <ListBox Height="Auto"
                      Grid.Row="1" 
                      ScrollViewer.CanContentScroll="False"

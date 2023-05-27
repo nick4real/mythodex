@@ -30,7 +30,6 @@ namespace Mythodex
         void Window1_SourceInitialized(object sender, EventArgs e)
         {
             WindowSizing.WindowInitialized(this);
-            
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

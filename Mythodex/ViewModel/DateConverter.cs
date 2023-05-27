@@ -1,0 +1,38 @@
+﻿using System;
+using System.Globalization;
+
+namespace Mythodex.ViewModel
+{
+    internal static class DateConverter
+    {
+        public static DateTime GetWeekDate(int i)
+        {
+            DateTime temp = DateTime.Today;
+            while (temp.DayOfWeek != DayOfWeek.Sunday)
+            {
+                temp = temp.AddDays(-1);
+            }
+            return temp.AddDays(i);
+
+        }
+        public static string ConvertToSaveFormat(DateTime input)
+        {
+            if (DateTime.TryParseExact(input.ToString(), "dd.MM.yyyy H:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime))
+            {
+                return dateTime.ToString("ddMMyyyyHHmmss");
+            }
+
+            return string.Empty;
+        }
+
+        public static string ConvertToDefaultFormat(DateTime input)
+        {
+            if (DateTime.TryParseExact(input.ToString(), "ddMMyyyyHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime))
+            {
+                return dateTime.ToString("dd.MM.yyyy H:mm:ss");
+            }
+
+            return string.Empty;
+        }
+    }
+}

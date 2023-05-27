@@ -31,6 +31,7 @@
         </Style>
         <Style TargetType="{x:Type ListBox}" x:Key="WeekGridListBoxStyle" >
             <Setter Property="Margin" Value="0"/>
+            <Setter Property="MinHeight" Value="20"/>
             <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
             <Setter Property="dd:DragDrop.IsDragSource" Value="True"/>
@@ -43,7 +44,7 @@
                                 BorderThickness="1" 
                                 BorderBrush="SteelBlue" 
                                 CornerRadius="4">
-                            <TextBlock Text="{Binding Path=ItemName}"
+                            <TextBlock Text="{Binding Path=Title}"
                                        
                                        TextWrapping="WrapWithOverflow"
                                        Height="60"/>
@@ -69,15 +70,30 @@
                         HorizontalAlignment="Center" >
                 <Button Content="L" 
                         Width="20"
-                        Margin="0,0,10,0" />
-                <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, 
-                       StringFormat='Сегодня {0:D}',
+                        Margin="0,0,10,0" 
+                        Command="{Binding DateSwitchCommand}"
+                        CommandParameter="0" />
+                <TextBlock Text="{Binding FirstDayWeekDate, 
+                       StringFormat=' {0:D}',
                        ConverterCulture=ru-RU}" 
                        Foreground="Black"
+                           Width="200"
+                           TextAlignment="Right"
                        HorizontalAlignment="Center" />
+                <TextBlock Text="-"/>
+                <TextBlock Text="{Binding LastDayWeekDate, 
+                           StringFormat=' {0:D}',
+                           ConverterCulture=ru-RU}" 
+                           Foreground="Black"
+                           Grid.Row="0"
+                           Width="200"
+                           TextAlignment="Left"
+                           HorizontalAlignment="Center" />
                 <Button Content="R" 
                         Width="20" 
-                        Margin="10,0,0,0" />
+                        Margin="10,0,0,0"
+                        Command="{Binding DateSwitchCommand}"
+                        CommandParameter="1" />
             </StackPanel>
             <ScrollViewer VerticalScrollBarVisibility="Disabled" 
                           HorizontalScrollBarVisibility="Hidden"

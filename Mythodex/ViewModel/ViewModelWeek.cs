@@ -6,27 +6,63 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Diagnostics;
 
 namespace Mythodex.ViewModel
 {
     internal class ViewModelWeek : INotifyPropertyChanged
     {
-        public ObservableCollection<DragItem> MondayItems { get; set; }
-        public ObservableCollection<DragItem> TuesdayItems { get; set; }
-        public ObservableCollection<DragItem> WednesdayItems { get; set; }
-        public ObservableCollection<DragItem> ThursdayItems { get; set; }
-        public ObservableCollection<DragItem> FridayItems { get; set; }
-        public ObservableCollection<DragItem> SaturdayItems { get; set; }
-        public ObservableCollection<DragItem> SundayItems { get; set; }
+        public string saveFolder = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mythodex"), "Dates");
+        
+        private DateTime _firstDayWeekDate;
+        public DateTime FirstDayWeekDate
+        {
+            get { return _firstDayWeekDate; }
+            set
+            {
+                _firstDayWeekDate = value;
+                OnPropertyChanged(nameof(FirstDayWeekDate));
+            }
+        }
+        private DateTime _lastDayWeekDate;
+        public DateTime LastDayWeekDate
+        {
+            get { return _lastDayWeekDate; }
+            set
+            {
+                _lastDayWeekDate = value;
+                OnPropertyChanged(nameof(LastDayWeekDate));
+            }
+        }
+        public ObservableCollection<Task> MondayItems { get; set; }
+        public ObservableCollection<Task> TuesdayItems { get; set; }
+        public ObservableCollection<Task> WednesdayItems { get; set; }
+        public ObservableCollection<Task> ThursdayItems { get; set; }
+        public ObservableCollection<Task> FridayItems { get; set; }
+        public ObservableCollection<Task> SaturdayItems { get; set; }
+        public ObservableCollection<Task> SundayItems { get; set; }
         public ViewModelWeek()
         {
-            MondayItems = DragItemGenerator.Next(3);
-            TuesdayItems = DragItemGenerator.Next(3);
-            WednesdayItems = DragItemGenerator.Next(3);
-            ThursdayItems = DragItemGenerator.Next(3);
-            FridayItems = DragItemGenerator.Next(3);
-            SaturdayItems = DragItemGenerator.Next(3);
-            SundayItems = DragItemGenerator.Next(3);
+            FirstDayWeekDate = DateConverter.GetWeekDate(1);
+            LastDayWeekDate = DateConverter.GetWeekDate(7);
+
+            //MondayItems = TaskLipsumGenerator.Next(3);
+            //TaskDataManager.SaveTaskCollection(MondayItems, FirstDayWeekDate);
+
+            MondayItems = TaskDataManager.LoadTaskCollection(FirstDayWeekDate);
+
+            TuesdayItems = TaskLipsumGenerator.Next(3);
+            WednesdayItems = TaskLipsumGenerator.Next(3);
+            ThursdayItems = TaskLipsumGenerator.Next(3);
+            FridayItems = TaskLipsumGenerator.Next(3);
+            SaturdayItems = TaskLipsumGenerator.Next(3);
+            SundayItems = TaskLipsumGenerator.Next(3);
+
+            
+            var temp = LastDayWeekDate.ToString();
+
         }
 
         private ICommand newTaskCommand;
@@ -45,9 +81,38 @@ namespace Mythodex.ViewModel
             }
         }
 
+        private ICommand dateSwitchCommand;
+        public ICommand DateSwitchCommand
+        {
+            get
+            {
+                if (dateSwitchCommand == null)
+                {
+                    dateSwitchCommand = new RelayCommand(
+                        param => DateSwitch_Click(param, EventArgs.Empty),
+                        param => true
+                    );
+                }
+                return dateSwitchCommand;
+            }
+        }
+        private void DateSwitch_Click(object sender, EventArgs e)
+        {
+            if ((string)sender == "1")
+            {
+                FirstDayWeekDate = FirstDayWeekDate.AddDays(7);
+                LastDayWeekDate = LastDayWeekDate.AddDays(7);
+            }
+            else
+            {
+                FirstDayWeekDate = FirstDayWeekDate.AddDays(-7);
+                LastDayWeekDate = LastDayWeekDate.AddDays(-7);
+            }
+        }
+
         private void NewTask_Click(object sender, EventArgs e)
         {
-            ObservableCollection<DragItem> temp = new ObservableCollection<DragItem>();
+            ObservableCollection<Task> temp = new ObservableCollection<Task>();
             switch ((string)sender)
             {
                 case "MondayItems":
@@ -72,7 +137,7 @@ namespace Mythodex.ViewModel
                     temp = SundayItems;
                     break;
             }
-            temp.Add(new DragItem { ItemName = Lorem.Sentence(8), ItemDescription = Lorem.Sentence(20), ItemValue = 19 });
+            temp.Add(TaskLipsumGenerator.Next());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -19,5 +19,11 @@ namespace Mythodex.View
 
             DataContext = new ViewModelToday();
         }
+        public Today(DateTime dateTime)
+        {
+            InitializeComponent();
+
+            DataContext = new ViewModelToday(dateTime);
+        }
     }
 }

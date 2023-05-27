@@ -31,13 +31,22 @@
 
     <!--Window element styles-->
     <Window.Resources>
+        <LinearGradientBrush x:Key="BGK" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="PeachPuff" Offset="0" />
+            <GradientStop Color="PapayaWhip" Offset="1" />
+        </LinearGradientBrush>
         <LinearGradientBrush x:Key="BGK2" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#2e6b41" Offset="0" />
             <GradientStop Color="#558263" Offset="1" />
         </LinearGradientBrush>
-        <LinearGradientBrush x:Key="BGK" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="PeachPuff" Offset="0" />
-            <GradientStop Color="PapayaWhip" Offset="1" />
+        <LinearGradientBrush x:Key="BGK1" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="Red" Offset="0" />
+            <GradientStop Color="Orange" Offset="0.17" />
+            <GradientStop Color="Yellow" Offset="0.33" />
+            <GradientStop Color="Green" Offset="0.5" />
+            <GradientStop Color="Blue" Offset="0.67" />
+            <GradientStop Color="Indigo" Offset="0.83" />
+            <GradientStop Color="Violet" Offset="1" />
         </LinearGradientBrush>
         <Style TargetType="Button" x:Key="PanelButton">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -66,6 +75,50 @@
             <Setter Property="Margin" Value="10,0,0,0" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Content" Value="Mythodex" />
+        </Style>
+        <Style TargetType="{x:Type ListBox}" x:Key="TodayListBoxStyle" >
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="dd:DragDrop.IsDragSource" Value="True"/>
+            <Setter Property="dd:DragDrop.IsDropTarget" Value="True"/>
+            <Setter Property="dd:DragDrop.UseDefaultDragAdorner" Value="True"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            BorderThickness="0"
+                                            Padding="0">
+                                        <ContentPresenter />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid Width="588"
+                              Margin="0,15,0,0"
+                              Background="Transparent"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                            
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="IsHitTestVisible" Value="True"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
 
@@ -105,74 +158,81 @@
         </Grid>
 
         <!--Lower grid-->
-        <Grid Grid.Row="1" Background="#00000000" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="200" MaxWidth="300"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="571*"/>
-                <ColumnDefinition Width="224*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Background="#00000000">
+            <Grid Background="#00000000" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="200" MaxWidth="300"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="571*"/>
+                    <ColumnDefinition Width="224*"/>
+                </Grid.ColumnDefinitions>
 
-            <!--Side menu-->
-            <StackPanel Grid.Column="0" 
-                        Orientation="Vertical"
-                        Background="#40000000">
-                <TextBlock Height="30"
-                           Width="Auto"
-                           Margin="0,30,0,0">
-                    <Label Content="Календарь"
-                           Style="{StaticResource CustomMenuUpperFont}"
-                           Margin="30,0,0,0"/>
-                </TextBlock>
-                <Button Width="Auto"
-                        Content="Сегодня"
-                        Height="30" 
-                        Command="{Binding OpenPageCommand}" 
-                        CommandParameter="Today" />
-                <Button Width="Auto"
-                        Content="Неделя"
-                        Height="30" 
-                        Command="{Binding OpenPageCommand}" 
-                        CommandParameter="Week" />
-                <Button Width="Auto"
-                        Content="Месяц"
-                        Height="30"
-                        Command="{Binding OpenPageCommand}" 
-                        CommandParameter="Month" />
-                <TextBlock Height="30"
-                           Width="Auto"
-                           Margin="0,20,0,0">
-                    <Label Content="Проекты"
-                           Style="{StaticResource CustomMenuUpperFont}"
-                           Margin="30,0,0,0"/>
-                </TextBlock>
-                <Button Width="Auto"
-                        Content="Проект1"
-                        Height="30" />
-                <Button Width="Auto"
-                        Content="Проект2"
-                        Height="30" />
-                <Button Width="30"
-                        Content="+"
-                        Height="30" 
-                        Command="{Binding NewProjectCommand}"/>
-            </StackPanel>
+                <!--Side menu-->
+                <StackPanel Grid.Column="0" 
+                            Orientation="Vertical"
+                            Background="#40000000">
+                    <TextBlock Height="30"
+                               Width="Auto"
+                               Margin="0,30,0,0">
+                        <Label Content="Календарь"
+                               Style="{StaticResource CustomMenuUpperFont}"
+                               Margin="30,0,0,0"/>
+                    </TextBlock>
+                    <Button Width="Auto"
+                            Content="Сегодня"
+                            Height="30" 
+                            Command="{Binding OpenPageCommand}" 
+                            CommandParameter="Today" />
+                    <Button Width="Auto"
+                            Content="Неделя"
+                            Height="30" 
+                            Command="{Binding OpenPageCommand}" 
+                            CommandParameter="Week" />
+                    <Button Width="Auto"
+                            Content="Месяц"
+                            Height="30"
+                            Command="{Binding OpenPageCommand}" 
+                            CommandParameter="Month" />
+                    <TextBlock Height="30"
+                               Width="Auto"
+                               Margin="0,20,0,0">
+                        <Label Content="Проекты"
+                               Style="{StaticResource CustomMenuUpperFont}"
+                               Margin="30,0,0,0"/>
+                    </TextBlock>
+                    <Button Width="Auto"
+                            Content="Проект1"
+                            Height="30" />
+                    <Button Width="Auto"
+                            Content="Проект2"
+                            Height="30" />
+                    <Button Width="Auto"
+                            Content="Проект2"
+                            Height="30" />
 
-            <GridSplitter 
-                Grid.Column="1" 
-                Width="5" 
-                Background="#79000000" 
-                HorizontalAlignment="Center"
-            />
+                    <ListBox Height="240"></ListBox>
+                    <Button Width="30"
+                            Content="+"
+                            Height="30" 
+                            Command="{Binding NewProjectCommand}"/>
+                </StackPanel>
 
-            <!--Main panel-->
-            <Grid Grid.Column="2" Background="#30000000" Grid.ColumnSpan="2" >
-                <Frame x:Name="MainPanelPage" DataContext="{Binding}"/>
+                <GridSplitter 
+                    Grid.Column="1" 
+                    Width="5" 
+                    Background="#79000000" 
+                    HorizontalAlignment="Center"
+                />
+
+                <!--Main panel-->
+                <Grid Grid.Column="2" Background="#30000000" Grid.ColumnSpan="2" >
+                    <Frame x:Name="MainPanelPage" DataContext="{Binding}"/>
+                </Grid>
             </Grid>
-            <!--<ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems}"/>
-                <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems2}"/>
-                <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems3}"/>
-                <ListBox Style="{StaticResource CustomDragListBox}" ItemsSource="{Binding DragItems4}"/>-->
+            <Grid>
+                <Grid Background="Black" HorizontalAlignment="Left" Width="400" />
+                
+            </Grid>
         </Grid>
     </Grid>
 </Window>
