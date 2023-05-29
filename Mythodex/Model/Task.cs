@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace Mythodex.Model
 {
     [Serializable]
-    internal class Task : INotifyPropertyChanged
+    public class Task : INotifyPropertyChanged
     {
         private string title;
         private string description;

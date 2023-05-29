@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 namespace Mythodex.ViewModel
 {
+    
     public class RelayCommand : ICommand
     {
         private readonly Action<object> execute;

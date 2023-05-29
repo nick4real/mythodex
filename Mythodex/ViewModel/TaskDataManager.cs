@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace Mythodex.ViewModel
 {
@@ -11,33 +12,27 @@ namespace Mythodex.ViewModel
         public static void SaveTaskCollection(ObservableCollection<Task> collection, DateTime date)
         {
             string fileName = Path.Combine(ApplicationPaths.DatesFolder, DateConverter.ConvertToSaveFormat(date));
-            using (Stream stream = File.Open(fileName, FileMode.Create))
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Task>));
+            using (StreamWriter writer = new StreamWriter(fileName))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, collection);
+                serializer.Serialize(writer, collection);
             }
         }
         public static ObservableCollection<Task> LoadTaskCollection(DateTime date)
         {
             string fileName = Path.Combine(ApplicationPaths.DatesFolder, DateConverter.ConvertToSaveFormat(date));
-            if (File.Exists(fileName))
+
+            if (File.Exists(fileName) && new FileInfo(fileName).Length > 0)
             {
-                using (Stream stream = File.Open(fileName, FileMode.Open))
+                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Task>));
+                using (StreamReader reader = new StreamReader(fileName))
                 {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    return (ObservableCollection<Task>)formatter.Deserialize(stream);
+                    return (ObservableCollection<Task>)serializer.Deserialize(reader);
                 }
             }
 
             return new ObservableCollection<Task>();
-        }
-        private static void SaveObservableCollection(ObservableCollection<Task> collection, string fileName)
-        {
-            using (Stream stream = File.Open(fileName, FileMode.Create))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, collection);
-            }
         }
     }
 }

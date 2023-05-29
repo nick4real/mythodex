@@ -191,7 +191,7 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      
                      Style="{StaticResource TodayListBoxStyle}"
-                     ItemsSource="{Binding DragItems}" 
+                     ItemsSource="{Binding DayItems}" 
                      MaxHeight="{Binding 
                      Path=ActualHeight, 
                      RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, 

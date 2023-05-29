@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Collections.Specialized;
 
 namespace Mythodex.ViewModel
 {
@@ -21,19 +22,39 @@ namespace Mythodex.ViewModel
                 OnPropertyChanged(nameof(SelectedDate));
             }
         }
-        public ObservableCollection<Task> DragItems { get; set; }
+        private ObservableCollection<Task> dayItems;
+        public ObservableCollection<Task> DayItems
+        {
+            get { return dayItems; }
+            set
+            {
+                if (dayItems != value)
+                {
+                    dayItems = value;
+                    OnPropertyChanged(nameof(DayItems)); // Уведомление об изменении свойства
+                }
+            }
+        }
 
         public ViewModelToday()
         {
-            DragItems = TaskLipsumGenerator.Next(10);
+            SelectedDate = DateTime.Today;
 
-            SelectedDate = DateTime.Now;
+            DayItems = TaskDataManager.LoadTaskCollection(SelectedDate);
+
+            DayItems.CollectionChanged += DayCollectionChanged;
         }
         public ViewModelToday(DateTime dateTime)
         {
-            DragItems = TaskLipsumGenerator.Next(10);
-
             SelectedDate = dateTime;
+
+            DayItems = TaskDataManager.LoadTaskCollection(SelectedDate);
+
+            DayItems.CollectionChanged += DayCollectionChanged;
+        }
+        private void DayCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            TaskDataManager.SaveTaskCollection((ObservableCollection<Task>)sender, SelectedDate);
         }
 
         private ICommand newTaskCommand;
@@ -68,13 +89,18 @@ namespace Mythodex.ViewModel
         }
         private void DateSwitch_Click(object sender, EventArgs e)
         {
+            TaskDataManager.SaveTaskCollection(DayItems, SelectedDate);
+
             if ((string)sender == "1")
                 SelectedDate = SelectedDate.AddDays(1);
             else SelectedDate = SelectedDate.AddDays(-1);
+
+            DayItems = TaskDataManager.LoadTaskCollection(SelectedDate);
         }
         private void NewTask_Click(object sender, EventArgs e)
         {
-            DragItems.Add(TaskLipsumGenerator.Next());
+            DayItems.Add(TaskLipsumGenerator.Next());
+            TaskDataManager.SaveTaskCollection(DayItems, SelectedDate);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

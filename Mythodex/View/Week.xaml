@@ -116,9 +116,10 @@
                         <Label Content="Понедельник"
                                Grid.Row="0"
                                HorizontalAlignment="Center" />
-                        <ListBox Grid.Row="1" 
+                        <ListBox Grid.Row="1"
                                  Style="{StaticResource WeekGridListBoxStyle}"
                                  ItemsSource="{Binding MondayItems}">
+                            
                         </ListBox>
                         <Button Style="{StaticResource AddTaskButtonStyle}"
                                 CommandParameter="MondayItems"/>

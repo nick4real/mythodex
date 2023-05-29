@@ -5,14 +5,14 @@ namespace Mythodex.ViewModel
 {
     internal static class DateConverter
     {
-        public static DateTime GetWeekDate(int i)
+        public static DateTime GetWeekDate(DateTime dateTime ,int i)
         {
-            DateTime temp = DateTime.Today;
-            while (temp.DayOfWeek != DayOfWeek.Sunday)
+            DateTime temp = dateTime;
+            while (temp.DayOfWeek != DayOfWeek.Monday)
             {
                 temp = temp.AddDays(-1);
             }
-            return temp.AddDays(i);
+            return temp.AddDays(i-1);
 
         }
         public static string ConvertToSaveFormat(DateTime input)

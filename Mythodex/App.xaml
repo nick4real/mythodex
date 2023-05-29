@@ -6,11 +6,5 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         
-            <Style TargetType="Control">
-                <Setter Property="FontFamily" Value="NoirPro ☞" />
-                <Setter Property="FontStyle" Value="Italic" />
-
-            </Style>
-        
     </Application.Resources>
 </Application>

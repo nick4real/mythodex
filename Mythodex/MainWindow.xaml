@@ -48,11 +48,17 @@
             <GradientStop Color="Indigo" Offset="0.83" />
             <GradientStop Color="Violet" Offset="1" />
         </LinearGradientBrush>
-        <Style TargetType="Button" x:Key="PanelButton">
+        <Style TargetType="{x:Type Button}" x:Key="CustomWindowButton">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="30"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="PanelButton">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="Auto"/>
         </Style>
         <Style TargetType="{x:Type Label}" x:Key="CustomMenuUpperFont">
             <Setter Property="HorizontalAlignment" Value="Left" />
@@ -140,18 +146,18 @@
                    Margin="10,0,0,0" 
                    Foreground="White"
                    Content="Mythodex" />
-            <Button Style="{StaticResource PanelButton}" Margin="0,0,800,0" Content="Настройки" Width="Auto"/>
-            <Button Style="{StaticResource PanelButton}" Margin="0,0,700,0" Content="Уведомления" Width="Auto"/>
+            <Button Style="{StaticResource PanelButton}" Margin="130,0,0,0" Content="Настройки" />
+            <Button Style="{StaticResource PanelButton}" Margin="210,0,0,0" Content="Уведомления" />
 
-            <Button Style="{StaticResource PanelButton}" 
+            <Button Style="{StaticResource CustomWindowButton}" 
                     Margin="0,0,5,0" 
                     Content="X"
                     Command="{Binding CloseCommand}" />
-            <Button Style="{StaticResource PanelButton}" 
+            <Button Style="{StaticResource CustomWindowButton}" 
                     Margin="0,0,40,0" 
                     Content="O"
                     Command="{Binding MaximizeCommand}" />
-            <Button Style="{StaticResource PanelButton}" 
+            <Button Style="{StaticResource CustomWindowButton}" 
                     Margin="0,0,75,0"
                     Content="-"
                     Command="{Binding MinimizeCommand}" />
@@ -229,9 +235,8 @@
                     <Frame x:Name="MainPanelPage" DataContext="{Binding}"/>
                 </Grid>
             </Grid>
-            <Grid>
-                <Grid Background="Black" HorizontalAlignment="Left" Width="400" />
-                
+            <Grid Visibility="Hidden">
+                <Grid Background="#90000000" HorizontalAlignment="Left" Width="400" />
             </Grid>
         </Grid>
     </Grid>
