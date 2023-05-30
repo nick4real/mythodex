@@ -146,8 +146,13 @@
                    Margin="10,0,0,0" 
                    Foreground="White"
                    Content="Mythodex" />
-            <Button Style="{StaticResource PanelButton}" Margin="130,0,0,0" Content="Настройки" />
-            <Button Style="{StaticResource PanelButton}" Margin="210,0,0,0" Content="Уведомления" />
+            <Button Style="{StaticResource PanelButton}" 
+                    Margin="130,0,0,0" 
+                    Content="Настройки" 
+                    Click="Settings_Click" />
+            <Button Style="{StaticResource PanelButton}" 
+                    Margin="210,0,0,0" 
+                    Content="Уведомления" />
 
             <Button Style="{StaticResource CustomWindowButton}" 
                     Margin="0,0,5,0" 
@@ -206,37 +211,64 @@
                                Style="{StaticResource CustomMenuUpperFont}"
                                Margin="30,0,0,0"/>
                     </TextBlock>
-                    <Button Width="Auto"
-                            Content="Проект1"
-                            Height="30" />
-                    <Button Width="Auto"
-                            Content="Проект2"
-                            Height="30" />
-                    <Button Width="Auto"
-                            Content="Проект2"
-                            Height="30" />
-
-                    <ListBox Height="240"></ListBox>
-                    <Button Width="30"
-                            Content="+"
-                            Height="30" 
-                            Command="{Binding NewProjectCommand}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5"
+                                 Height="30"
+                                 Background="WhiteSmoke"
+                                 Text="{Binding NewProjectTextBox}"
+                                 Grid.Column="0"/>
+                        <Button Width="30"
+                                Margin="5"
+                                Content="+"
+                                Height="30"
+                                Grid.Column="1"
+                                Command="{Binding NewProjectCommand}"/>
+                    </Grid>
+                    <Button Margin="5"
+                            Content="Проект: Миссия Невыполнима"
+                            Height="30"
+                            Grid.Column="1"
+                            Command="{Binding OpenProjectCommand}"/>
+                    <ItemsControl ItemsSource="{Binding ButtonList}" Height="240">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding}" 
+                                        Command="{Binding DataContext.ButtonCommand, 
+                                        RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </StackPanel>
 
                 <GridSplitter 
                     Grid.Column="1" 
                     Width="5" 
                     Background="#79000000" 
-                    HorizontalAlignment="Center"
-                />
+                    HorizontalAlignment="Center" />
 
                 <!--Main panel-->
                 <Grid Grid.Column="2" Background="#30000000" Grid.ColumnSpan="2" >
                     <Frame x:Name="MainPanelPage" DataContext="{Binding}"/>
                 </Grid>
             </Grid>
-            <Grid Visibility="Hidden">
-                <Grid Background="#90000000" HorizontalAlignment="Left" Width="400" />
+            <Grid x:Name="Settings" Visibility="Hidden">
+                <Frame HorizontalAlignment="Left" Width="400">
+                    <Frame.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#00000000" Offset="1"/>
+                            <GradientStop Color="#A0000000" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                </Frame>
             </Grid>
         </Grid>
     </Grid>

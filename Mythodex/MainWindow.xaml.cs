@@ -17,17 +17,16 @@ namespace Mythodex
             InitializeComponent();
 
             
-            this.SourceInitialized += new EventHandler(Window1_SourceInitialized);
+            this.SourceInitialized += new EventHandler(Window_SourceInitialized);
 
             DataContext = new ViewModelMain(MainPanelPage);
         }
-
-        void Window1_Loaded(object sender, RoutedEventArgs e)
+        public void Settings_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Maximized;
+            Settings.Visibility = (Settings.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;  
         }
 
-        void Window1_SourceInitialized(object sender, EventArgs e)
+        void Window_SourceInitialized(object sender, EventArgs e)
         {
             WindowSizing.WindowInitialized(this);
         }

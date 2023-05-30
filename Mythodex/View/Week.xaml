@@ -62,10 +62,10 @@
     </Page.Resources>
     <Grid>
         <StackPanel Height="Auto" 
-                    Width="Auto" 
-                    ClipToBounds="True"
-                    VerticalAlignment="Center" 
-                    Grid.Column="1">
+                        Width="Auto" 
+                        ClipToBounds="True"
+                        VerticalAlignment="Center" 
+                        Grid.Column="1">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center" >
                 <Button Content="L" 
@@ -74,21 +74,21 @@
                         Command="{Binding DateSwitchCommand}"
                         CommandParameter="0" />
                 <TextBlock Text="{Binding FirstDayWeekDate, 
-                       StringFormat=' {0:D}',
-                       ConverterCulture=ru-RU}" 
-                       Foreground="Black"
-                           Width="200"
-                           TextAlignment="Right"
-                       HorizontalAlignment="Center" />
+                        StringFormat=' {0:D}',
+                        ConverterCulture=ru-RU}" 
+                        Foreground="Black"
+                            Width="200"
+                            TextAlignment="Right"
+                        HorizontalAlignment="Center" />
                 <TextBlock Text="-"/>
                 <TextBlock Text="{Binding LastDayWeekDate, 
-                           StringFormat=' {0:D}',
-                           ConverterCulture=ru-RU}" 
-                           Foreground="Black"
-                           Grid.Row="0"
-                           Width="200"
-                           TextAlignment="Left"
-                           HorizontalAlignment="Center" />
+                            StringFormat=' {0:D}',
+                            ConverterCulture=ru-RU}" 
+                            Foreground="Black"
+                            Grid.Row="0"
+                            Width="200"
+                            TextAlignment="Left"
+                            HorizontalAlignment="Center" />
                 <Button Content="R" 
                         Width="20" 
                         Margin="10,0,0,0"
@@ -96,10 +96,10 @@
                         CommandParameter="1" />
             </StackPanel>
             <ScrollViewer VerticalScrollBarVisibility="Disabled" 
-                          HorizontalScrollBarVisibility="Hidden"
-                          PreviewMouseWheel="StackPanel_PreviewMouseWheel"
-                          HorizontalAlignment="Center"
-                          Height="Auto" >
+                            HorizontalScrollBarVisibility="Hidden"
+                            PreviewMouseWheel="StackPanel_PreviewMouseWheel"
+                            HorizontalAlignment="Center"
+                            Height="Auto" >
                 <StackPanel Orientation="Horizontal" 
                             MaxHeight="{Binding 
                             Path=ActualHeight, 
@@ -114,12 +114,12 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Content="Понедельник"
-                               Grid.Row="0"
-                               HorizontalAlignment="Center" />
+                                Grid.Row="0"
+                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1"
-                                 Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding MondayItems}">
-                            
+                                    Style="{StaticResource WeekGridListBoxStyle}"
+                                    ItemsSource="{Binding MondayItems}">
+
                         </ListBox>
                         <Button Style="{StaticResource AddTaskButtonStyle}"
                                 CommandParameter="MondayItems"/>
@@ -132,11 +132,11 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Content="Вторник"
-                               Grid.Row="0"
-                               HorizontalAlignment="Center" />
+                                Grid.Row="0"
+                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
-                                 Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding TuesdayItems}" />
+                                    Style="{StaticResource WeekGridListBoxStyle}"
+                                    ItemsSource="{Binding TuesdayItems}" />
                         <Button Style="{StaticResource AddTaskButtonStyle}"
                                 CommandParameter="TuesdayItems"/>
                     </Grid>
@@ -148,11 +148,11 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Content="Среда"
-                               Grid.Row="0"
-                               HorizontalAlignment="Center" />
+                                Grid.Row="0"
+                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1"
-                                 Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding WednesdayItems}" />
+                                    Style="{StaticResource WeekGridListBoxStyle}"
+                                    ItemsSource="{Binding WednesdayItems}" />
                         <Button Style="{StaticResource AddTaskButtonStyle}"
                                 CommandParameter="WednesdayItems"/>
                     </Grid>
@@ -164,11 +164,11 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Content="Четверг"
-                               Grid.Row="0"
-                               HorizontalAlignment="Center" />
+                                Grid.Row="0"
+                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
-                                 Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding ThursdayItems}" />
+                                    Style="{StaticResource WeekGridListBoxStyle}"
+                                    ItemsSource="{Binding ThursdayItems}" />
                         <Button Style="{StaticResource AddTaskButtonStyle}"
                                 CommandParameter="ThursdayItems"/>
                     </Grid>
@@ -180,11 +180,11 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Content="Пятница"
-                               Grid.Row="0"
-                               HorizontalAlignment="Center" />
+                                Grid.Row="0"
+                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
-                                 Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding FridayItems}" />
+                                    Style="{StaticResource WeekGridListBoxStyle}"
+                                    ItemsSource="{Binding FridayItems}" />
                         <Button Style="{StaticResource AddTaskButtonStyle}"
                                 CommandParameter="FridayItems"/>
                     </Grid>
@@ -196,11 +196,11 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Content="Суббота"
-                               Grid.Row="0"
-                               HorizontalAlignment="Center" />
+                                Grid.Row="0"
+                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
-                                 Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding SaturdayItems}" />
+                                    Style="{StaticResource WeekGridListBoxStyle}"
+                                    ItemsSource="{Binding SaturdayItems}" />
                         <Button Style="{StaticResource AddTaskButtonStyle}"
                                 CommandParameter="SaturdayItems"/>
                     </Grid>
@@ -212,11 +212,11 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Content="Воскресенье"
-                               Grid.Row="0"
-                               HorizontalAlignment="Center" />
+                                Grid.Row="0"
+                                HorizontalAlignment="Center" />
                         <ListBox Grid.Row="1" 
-                                 Style="{StaticResource WeekGridListBoxStyle}"
-                                 ItemsSource="{Binding SundayItems}" />
+                                    Style="{StaticResource WeekGridListBoxStyle}"
+                                    ItemsSource="{Binding SundayItems}" />
                         <Button Style="{StaticResource AddTaskButtonStyle}"
                                 CommandParameter="SundayItems"/>
                     </Grid>

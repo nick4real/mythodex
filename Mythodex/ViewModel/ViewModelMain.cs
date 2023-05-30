@@ -14,13 +14,42 @@ namespace Mythodex.ViewModel
     internal class ViewModelMain : INotifyPropertyChanged
     {
         private Frame mainPanelPage;
+
+        private ObservableCollection<ButtonCommand> buttonList;
+        public ObservableCollection<ButtonCommand> ButtonList
+        {
+            get { return buttonList; }
+            set
+            {
+                buttonList = value;
+                OnPropertyChanged(nameof(ButtonList));
+            }
+        }
+        
+        private string newProjectTextBox;
+        public string NewProjectTextBox
+        {
+            get
+            {
+                return newProjectTextBox;
+            }
+            set
+            {
+                newProjectTextBox = value;
+                OnPropertyChanged(nameof(NewProjectTextBox));
+            }
+        }
         public ViewModelMain(Frame frame)
         {
             mainPanelPage = frame;
             mainPanelPage.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
             ApplicationPaths.Check();
+
+            frame.Content = new Today();
         }
+
+        #region Commands
         private ICommand closeCommand;
         public ICommand CloseCommand
         {
@@ -29,8 +58,7 @@ namespace Mythodex.ViewModel
                 if (closeCommand == null)
                 {
                     closeCommand = new RelayCommand(
-                        param => CloseButton_Click(param, EventArgs.Empty),
-                        param => true
+                        param => CloseButton_Click(param, EventArgs.Empty)
                     );
                 }
                 return closeCommand;
@@ -99,15 +127,29 @@ namespace Mythodex.ViewModel
             {
                 return newProjectCommand ?? (newProjectCommand = new RelayCommand(param =>
                 {
-                    if (param != null && param is string viewPath)
+                    if (!String.IsNullOrWhiteSpace(NewProjectTextBox))
                     {
-                        var uri = new Uri($"View/{viewPath}.xaml", UriKind.Relative);
-                        mainPanelPage.NavigationService.Navigate(uri);
+                        TaskDataManager.NewProjectFile(NewProjectTextBox);
                     }
+                }
+                )) ;
+            }
+        }
+        private ICommand openProjectCommand;
+        public ICommand OpenProjectCommand
+        {
+            get
+            {
+                return openPageCommand ?? (openPageCommand = new RelayCommand(param =>
+                {
+                    var uri = new Uri($"View/ProjectTemplate.xaml", UriKind.Relative);
+                    mainPanelPage.NavigationService.Navigate(uri);
                 }));
             }
         }
+        #endregion
 
+        #region Events
         private void CloseButton_Click(object sender, EventArgs e)
         {
             Application.Current.Shutdown();
@@ -124,15 +166,14 @@ namespace Mythodex.ViewModel
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
-        public void DragWindowLeftMouseButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Application.Current.MainWindow.DragMove();
-        }
+        #endregion
 
+        #region INotifyPropertyChanged realisation
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

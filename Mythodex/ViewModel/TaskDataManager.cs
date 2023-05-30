@@ -34,5 +34,22 @@ namespace Mythodex.ViewModel
 
             return new ObservableCollection<Task>();
         }
+        public static void NewProjectFile(string projectName)
+        {
+            ObservableCollection<ObservableCollection<Task>> taskArray = new ObservableCollection<ObservableCollection<Task>>
+            {
+                new ObservableCollection<Task>(),
+                new ObservableCollection<Task>(),
+                new ObservableCollection<Task>()
+            };
+
+            string fileName = Path.Combine(ApplicationPaths.ProjectsFolder, projectName);
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<ObservableCollection<Task>>));
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                serializer.Serialize(writer, taskArray);
+            }
+        }
     }
 }

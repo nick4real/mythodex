@@ -17,5 +17,9 @@ namespace Mythodex.ViewModel
                 collection.Add(Next());
             return collection;
         }
+        public static string NextString()
+        {
+            return Lorem.Sentence(12);
+        }
     }
 }

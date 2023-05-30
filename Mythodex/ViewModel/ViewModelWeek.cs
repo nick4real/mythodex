@@ -151,7 +151,7 @@ namespace Mythodex.ViewModel
             SaturdayItems.CollectionChanged += SaturdayCollectionChanged;
             SundayItems.CollectionChanged += SundayCollectionChanged;
         }
-        #region ChangedEvent
+        #region CollectionChangedEvent
         private void MondayCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             TaskDataManager.SaveTaskCollection((ObservableCollection<Task>)sender, DateConverter.GetWeekDate(FirstDayWeekDate, 1));

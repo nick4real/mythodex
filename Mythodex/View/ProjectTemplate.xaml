@@ -9,65 +9,29 @@
       d:DesignHeight="560" 
       d:DesignWidth="700"
       Title="Project">
-    
-    <ScrollViewer Background="Bisque"
-                  
-                  VerticalScrollBarVisibility="Hidden" 
-                  HorizontalScrollBarVisibility="Hidden" >
-        <StackPanel Margin="0,0,0,0"
-                    Height="Auto"
-                    Width="600"
-                    
-                    Background="DarkSlateGray" >
-            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, 
-                StringFormat='Сегодня {0:D}',
-                ConverterCulture=ru-RU}" 
-                       Foreground="White"
-                       HorizontalAlignment="Center" />
-            <StackPanel Height="Auto"
-                        Background="Bisque" 
-                        Orientation="Horizontal">
-                <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-            </StackPanel>
-            <ScrollViewer VerticalScrollBarVisibility="Disabled" 
-                          HorizontalScrollBarVisibility="Hidden"
-                          PreviewMouseWheel="StackPanel_PreviewMouseWheel" 
-                          Background="CornflowerBlue" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                    <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                    <TextBlock Text="Lorem ipsum"
-                               Height="200"
-                               Background="Aqua"
-                               Width="200"
-                               Margin="5"/>
-                    <TextBlock Text="Lorem ipsum"
-                           Height="200"
-                           Width="200"
-                           Margin="5"/>
-                </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
-    </ScrollViewer>
+
+    <Grid>
+        <ItemsControl ItemsSource="{Binding ColumnCollection}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0 10"/>
+                        <ItemsControl ItemsSource="{Binding TaskCollection}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Gray" BorderThickness="1" Margin="0 5">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" Margin="5"/>
+                                            <TextBlock Text="{Binding Description}" Margin="5"/>
+                                            <!-- Другие свойства задачи -->
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 </Page>
