@@ -32,5 +32,11 @@ namespace Mythodex.View
 
             e.Handled = true;
         }
+
+        private void TextBox_LostFocus(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var temp = (ViewModelWeek)DataContext;
+            temp.MondayItems.Add(TaskLipsumGenerator.Next());
+        }
     }
 }

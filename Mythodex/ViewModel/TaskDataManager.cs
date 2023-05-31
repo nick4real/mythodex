@@ -36,20 +36,39 @@ namespace Mythodex.ViewModel
         }
         public static void NewProjectFile(string projectName)
         {
-            ObservableCollection<ObservableCollection<Task>> taskArray = new ObservableCollection<ObservableCollection<Task>>
-            {
-                new ObservableCollection<Task>(),
-                new ObservableCollection<Task>(),
-                new ObservableCollection<Task>()
-            };
+            ProjectDesk projectFile = new ProjectDesk();
 
             string fileName = Path.Combine(ApplicationPaths.ProjectsFolder, projectName);
 
-            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<ObservableCollection<Task>>));
+            XmlSerializer serializer = new XmlSerializer(typeof(ProjectDesk));
             using (StreamWriter writer = new StreamWriter(fileName))
             {
-                serializer.Serialize(writer, taskArray);
+                serializer.Serialize(writer, projectFile);
             }
+        }
+        public static void SaveProjectFile(ProjectDesk projectDesk, string projectName)
+        {
+            string fileName = Path.Combine(ApplicationPaths.ProjectsFolder, projectName);
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ProjectDesk));
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                serializer.Serialize(writer, projectDesk);
+            }
+        }
+        public static ProjectDesk LoadProjectFile(string projectName)
+        {
+            string fileName = Path.Combine(ApplicationPaths.ProjectsFolder, projectName);
+
+            if (File.Exists(fileName) && new FileInfo(fileName).Length > 0)
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(ProjectDesk));
+                using (StreamReader reader = new StreamReader(fileName))
+                {
+                    return (ProjectDesk)serializer.Deserialize(reader);
+                }
+            }
+            return new ProjectDesk();
         }
     }
 }

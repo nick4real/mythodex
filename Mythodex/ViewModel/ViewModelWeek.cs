@@ -3,12 +3,19 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
+using System.Windows.Threading;
 
 namespace Mythodex.ViewModel
 {
     internal class ViewModelWeek : INotifyPropertyChanged
     {
+        private DispatcherTimer timer;
+
         private DateTime _firstDayWeekDate;
         public DateTime FirstDayWeekDate
         {
@@ -123,6 +130,7 @@ namespace Mythodex.ViewModel
             }
         }
         #endregion
+        
         public ViewModelWeek()
         {
             DateTime today = DateTime.Today;
@@ -145,7 +153,19 @@ namespace Mythodex.ViewModel
             FridayItems.CollectionChanged += FridayCollectionChanged;
             SaturdayItems.CollectionChanged += SaturdayCollectionChanged;
             SundayItems.CollectionChanged += SundayCollectionChanged;
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1); // Здесь n - интервал времени в секундах
+            timer.Tick += Timer_Tick;
+
+            void Timer_Tick(object sender, EventArgs e)
+            {
+                SaveAllItems();
+            }
+
+            timer.Start();
         }
+
         #region CollectionChangedEvent
         private void MondayCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -214,13 +234,7 @@ namespace Mythodex.ViewModel
         }
         private void DateSwitch_Click(object sender, EventArgs e)
         {
-            TaskDataManager.SaveTaskCollection(MondayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 1));
-            TaskDataManager.SaveTaskCollection(TuesdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 2));
-            TaskDataManager.SaveTaskCollection(WednesdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 3));
-            TaskDataManager.SaveTaskCollection(ThursdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 4));
-            TaskDataManager.SaveTaskCollection(FridayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 5));
-            TaskDataManager.SaveTaskCollection(SaturdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 6));
-            TaskDataManager.SaveTaskCollection(SundayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 7));
+            SaveAllItems();
 
             if ((string)sender == "1")
             {
@@ -233,13 +247,7 @@ namespace Mythodex.ViewModel
                 LastDayWeekDate = LastDayWeekDate.AddDays(-7);
             }
 
-            MondayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 1));
-            TuesdayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 2));
-            WednesdayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 3));
-            ThursdayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 4));
-            FridayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 5));
-            SaturdayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 6));
-            SundayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 7));
+            LoadAllItems();
         }
         private void NewTask_Click(object sender, EventArgs e)
         {
@@ -279,7 +287,27 @@ namespace Mythodex.ViewModel
             collection.Add(TaskLipsumGenerator.Next());
             TaskDataManager.SaveTaskCollection(collection, DateConverter.GetWeekDate(FirstDayWeekDate, dateTime));
         }
-
+        private void SaveAllItems()
+        {
+            TaskDataManager.SaveTaskCollection(MondayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 1));
+            TaskDataManager.SaveTaskCollection(TuesdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 2));
+            TaskDataManager.SaveTaskCollection(WednesdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 3));
+            TaskDataManager.SaveTaskCollection(ThursdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 4));
+            TaskDataManager.SaveTaskCollection(FridayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 5));
+            TaskDataManager.SaveTaskCollection(SaturdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 6));
+            TaskDataManager.SaveTaskCollection(SundayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 7));
+        }
+        private void LoadAllItems()
+        {
+            MondayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 1));
+            TuesdayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 2));
+            WednesdayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 3));
+            ThursdayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 4));
+            FridayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 5));
+            SaturdayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 6));
+            SundayItems = TaskDataManager.LoadTaskCollection(DateConverter.GetWeekDate(FirstDayWeekDate, 7));
+        }
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

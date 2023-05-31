@@ -15,8 +15,8 @@ namespace Mythodex.ViewModel
     {
         private Frame mainPanelPage;
 
-        private ObservableCollection<ButtonCommand> buttonList;
-        public ObservableCollection<ButtonCommand> ButtonList
+        private ObservableCollection<ProjectButton> buttonList;
+        public ObservableCollection<ProjectButton> ButtonList
         {
             get { return buttonList; }
             set
@@ -47,6 +47,28 @@ namespace Mythodex.ViewModel
             ApplicationPaths.Check();
 
             frame.Content = new Today();
+
+            ReloadButtons();
+        }
+
+        private void ReloadButtons()
+        {
+            string folderPath = ApplicationPaths.ProjectsFolder; // Укажите путь к папке, где находятся файлы
+            ButtonList = new ObservableCollection<ProjectButton>();
+
+            string[] files = Directory.GetFiles(folderPath); // Получение списка файлов в папке
+
+            foreach (string filePath in files)
+            {
+                string fileName = Path.GetFileName(filePath); // Получение названия файла из полного пути
+
+                ProjectButton projectButton = new ProjectButton()
+                {
+                    ProjectName = fileName
+                };
+
+                ButtonList.Add(projectButton);
+            }
         }
 
         #region Commands
@@ -106,13 +128,15 @@ namespace Mythodex.ViewModel
                 {
                     if (param != null && param is string viewPath)
                     {
+                        mainPanelPage.Content = null;
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
                         if (viewPath == "Month")
                             mainPanelPage.Navigate(new Month(mainPanelPage));
                         else
                         {
-
-                        var uri = new Uri($"View/{viewPath}.xaml", UriKind.Relative);
-                        mainPanelPage.NavigationService.Navigate(uri);
+                            var uri = new Uri($"View/{viewPath}.xaml", UriKind.Relative);
+                            mainPanelPage.NavigationService.Navigate(uri);
                         }
                     }
 
@@ -130,6 +154,7 @@ namespace Mythodex.ViewModel
                     if (!String.IsNullOrWhiteSpace(NewProjectTextBox))
                     {
                         TaskDataManager.NewProjectFile(NewProjectTextBox);
+                        ReloadButtons();
                     }
                 }
                 )) ;
@@ -142,8 +167,17 @@ namespace Mythodex.ViewModel
             {
                 return openProjectCommand ?? (openProjectCommand = new RelayCommand(param =>
                 {
-                    var uri = new Uri($"View/ProjectTemplate.xaml", UriKind.Relative);
-                    mainPanelPage.NavigationService.Navigate(uri);
+                    var page = mainPanelPage.Content as ProjectTemplate;
+                    if (page != null)
+                    {
+                        page.Cleanup();
+
+                        mainPanelPage.Content = null;
+
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                    }
+                    mainPanelPage.Navigate(new ProjectTemplate((string)param));
                 }));
             }
         }

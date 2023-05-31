@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Mythodex.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Mythodex.Model
 {
@@ -18,6 +20,23 @@ namespace Mythodex.Model
             {
                 columnCollection = value;
                 OnPropertyChanged(nameof(ColumnCollection));
+            }
+        }
+        public ProjectDesk()
+        {
+            ColumnCollection = new ObservableCollection<Column>();
+        }
+
+        private ICommand addColumn;
+        public ICommand AddColumn
+        {
+            get
+            {
+                return addColumn ?? (addColumn = new RelayCommand(param =>
+                {
+                    ColumnCollection.Add(new Column());
+                }
+                ));
             }
         }
 

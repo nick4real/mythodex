@@ -228,22 +228,13 @@
                                 Grid.Column="1"
                                 Command="{Binding NewProjectCommand}"/>
                     </Grid>
-                    <Button Margin="0"
-                            Content="Проект: Миссия Невыполнима"
-                            Height="30"
-                            Grid.Column="1"
-                            Command="{Binding OpenProjectCommand}"/>
-                    <Button Margin="0"
-                            Content="Разработка курсовой"
-                            Height="30"
-                            Grid.Column="1"
-                            Command="{Binding OpenProjectCommand}"/>
                     <ItemsControl ItemsSource="{Binding ButtonList}" Height="240">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button Content="{Binding}" 
-                                        Command="{Binding DataContext.ButtonCommand, 
-                                        RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+                                <Button Height="30"
+                                        Content="{Binding ProjectName}" 
+                                        Command="{Binding DataContext.OpenProjectCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                        CommandParameter="{Binding ProjectName}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <ItemsControl.ItemsPanel>

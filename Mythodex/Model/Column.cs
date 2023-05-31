@@ -32,6 +32,10 @@ namespace Mythodex.Model
                 OnPropertyChanged(nameof(TaskCollection));
             }
         }
+        public Column()
+        {
+            TaskCollection = new ObservableCollection<Task>();
+        }
         private ICommand newTaskCommand;
         public ICommand NewTaskCommand
         {

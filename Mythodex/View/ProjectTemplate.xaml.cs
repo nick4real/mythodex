@@ -10,11 +10,16 @@ namespace Mythodex.View
     /// </summary>
     public partial class ProjectTemplate : Page
     {
-        public ProjectTemplate()
+        public ProjectTemplate(string projectName)
         {
             InitializeComponent();
 
-            DataContext = new ViewModelProjectTemplate();
+            DataContext = new ViewModelProjectTemplate(projectName);
+        }
+        public void Cleanup()
+        {
+            var temp = (ViewModelProjectTemplate)DataContext;
+            temp.Clearup();
         }
         private void StackPanel_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -22,9 +27,11 @@ namespace Mythodex.View
             if (e.Delta > 0)
             {
                 scrollViewer.LineLeft();
+                scrollViewer.LineLeft();
             }
             else if (e.Delta < 0)
             {
+                scrollViewer.LineRight();
                 scrollViewer.LineRight();
             }
 

@@ -7,6 +7,7 @@
       xmlns:local="clr-namespace:Mythodex.View"
       xmlns:vm="clr-namespace:Mythodex.ViewModel"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="560" 
       d:DesignWidth="700"
@@ -45,11 +46,18 @@
                                 BorderThickness="1" 
                                 BorderBrush="SteelBlue" 
                                 CornerRadius="4">
-                            <TextBox Text="{Binding Path=Title}"
+                            <TextBox Text="{Binding Title}"
+                                     x:Name="textBox"
                                      Width="235"
                                        Background="#00000000"
                                        TextWrapping="WrapWithOverflow"
-                                       Height="60"/>
+                                       Height="60">
+                            </TextBox>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction Command="{Binding TextBoxLostFocusCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Border>
                     </DataTemplate>
                 </Setter.Value>

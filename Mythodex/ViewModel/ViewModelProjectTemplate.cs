@@ -10,11 +10,13 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics;
 using System.Collections.Specialized;
+using System.Windows.Threading;
 
 namespace Mythodex.ViewModel
 {
     internal class ViewModelProjectTemplate : INotifyPropertyChanged
     {
+        private DispatcherTimer timer;
         private ProjectDesk projectDesk;
         public ProjectDesk ProjectDesk
         {
@@ -26,27 +28,25 @@ namespace Mythodex.ViewModel
             }
         }
 
-        public ViewModelProjectTemplate()
+        public ViewModelProjectTemplate(string projectName)
         {
-            ProjectDesk = new ProjectDesk();
-            ProjectDesk.ColumnCollection = new ObservableCollection<Column>()
+            ProjectDesk = TaskDataManager.LoadProjectFile(projectName);
+            
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(2);
+            timer.Tick += Timer_Tick;
+
+            void Timer_Tick(object sender, EventArgs e)
             {
-                new Column()
-                {
-                    Name = TaskLipsumGenerator.NextString(),
-                    TaskCollection = TaskLipsumGenerator.Next(3)
-                },
-                new Column()
-                {
-                    Name = TaskLipsumGenerator.NextString(),
-                    TaskCollection = TaskLipsumGenerator.Next(3)
-                },
-                new Column()
-                {
-                    Name = TaskLipsumGenerator.NextString(),
-                    TaskCollection = TaskLipsumGenerator.Next(3)
-                }
-            };
+                TaskDataManager.SaveProjectFile(ProjectDesk, projectName);
+            }
+
+            timer.Start();
+        }
+
+        public void Clearup()
+        {
+            timer.Stop();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
