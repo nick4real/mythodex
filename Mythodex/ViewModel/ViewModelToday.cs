@@ -31,7 +31,7 @@ namespace Mythodex.ViewModel
                 if (dayItems != value)
                 {
                     dayItems = value;
-                    OnPropertyChanged(nameof(DayItems)); // Уведомление об изменении свойства
+                    OnPropertyChanged(nameof(DayItems));
                 }
             }
         }

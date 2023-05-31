@@ -1,15 +1,9 @@
 ﻿using Mythodex.Model;
-using LoremNET;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Diagnostics;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Mythodex.ViewModel
 {
@@ -36,6 +30,7 @@ namespace Mythodex.ViewModel
             }
         }
 
+        #region ObservableCollection<Task> WeekItems
         private ObservableCollection<Task> mondayItems;
         public ObservableCollection<Task> MondayItems
         {
@@ -127,11 +122,11 @@ namespace Mythodex.ViewModel
                 }
             }
         }
-
+        #endregion
         public ViewModelWeek()
         {
             DateTime today = DateTime.Today;
-            
+
             FirstDayWeekDate = DateConverter.GetWeekDate(today, 1);
             LastDayWeekDate = DateConverter.GetWeekDate(today, 7);
 
@@ -201,7 +196,7 @@ namespace Mythodex.ViewModel
                 return newTaskCommand;
             }
         }
-        
+
         private ICommand dateSwitchCommand;
         public ICommand DateSwitchCommand
         {

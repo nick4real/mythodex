@@ -25,18 +25,18 @@ namespace Mythodex.ViewModel
                     _frame.Navigate(new Today(value));
             }
         }
+
         public ViewModelMonth()
         {
             
         }
+
         public ViewModelMonth(Frame frame)
         {
             _frame = frame;
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

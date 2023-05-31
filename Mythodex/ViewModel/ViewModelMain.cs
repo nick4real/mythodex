@@ -140,7 +140,7 @@ namespace Mythodex.ViewModel
         {
             get
             {
-                return openPageCommand ?? (openPageCommand = new RelayCommand(param =>
+                return openProjectCommand ?? (openProjectCommand = new RelayCommand(param =>
                 {
                     var uri = new Uri($"View/ProjectTemplate.xaml", UriKind.Relative);
                     mainPanelPage.NavigationService.Navigate(uri);

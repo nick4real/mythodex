@@ -36,6 +36,7 @@
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
             <Setter Property="dd:DragDrop.IsDragSource" Value="True"/>
             <Setter Property="dd:DragDrop.IsDropTarget" Value="True"/>
+            <Setter Property="dd:DragDrop.UseDefaultDragAdorner" Value="True"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
@@ -44,8 +45,9 @@
                                 BorderThickness="1" 
                                 BorderBrush="SteelBlue" 
                                 CornerRadius="4">
-                            <TextBlock Text="{Binding Path=Title}"
-                                       
+                            <TextBox Text="{Binding Path=Title}"
+                                     Width="235"
+                                       Background="#00000000"
                                        TextWrapping="WrapWithOverflow"
                                        Height="60"/>
                         </Border>

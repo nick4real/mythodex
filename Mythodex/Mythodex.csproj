@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>OIG.PszTQpY2TmeIp57.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,10 @@
     <None Remove="View\NoirPro-Italic.ttf" />
     <None Remove="View\NoirPro-Light.ttf" />
     <None Remove="View\NoirPro-Medium.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="OIG.PszTQpY2TmeIp57.ico" />
   </ItemGroup>
 
   <ItemGroup>

@@ -25,6 +25,7 @@ namespace Mythodex.ViewModel
                 OnPropertyChanged(nameof(ProjectDesk));
             }
         }
+
         public ViewModelProjectTemplate()
         {
             ProjectDesk = new ProjectDesk();
@@ -47,6 +48,7 @@ namespace Mythodex.ViewModel
                 }
             };
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

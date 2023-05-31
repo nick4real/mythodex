@@ -21,6 +21,39 @@ namespace Mythodex
 
             DataContext = new ViewModelMain(MainPanelPage);
         }
+
+        public ProjectTemplate ProjectTemplate
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Month Month
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Week Week
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Today Today
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public void Settings_Click(object sender, RoutedEventArgs e)
         {
             Settings.Visibility = (Settings.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;  
@@ -42,6 +75,14 @@ namespace Mythodex
         public static class WindowSizing
         {
             const int MONITOR_DEFAULTTONEAREST = 0x00000002;
+
+            public static ProjectTemplate ProjectTemplate
+            {
+                get => default;
+                set
+                {
+                }
+            }
 
             #region DLLImports
 
