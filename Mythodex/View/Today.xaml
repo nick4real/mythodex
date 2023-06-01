@@ -1,7 +1,8 @@
 ﻿<Page x:Class="Mythodex.View.Today"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:dd="urn:gong-wpf-dragdrop"
       xmlns:local="clr-namespace:Mythodex.View"
@@ -13,47 +14,132 @@
       Title="Today">
     <Page.Resources>
         <vm:MaxHeightConverter x:Key="MaxHeightConverter"/>
-        <sys:Int32 x:Key="MaxHeightCalebrate">80</sys:Int32>
+        <sys:Int32 x:Key="MaxHeightCalebrate">90</sys:Int32>
         <Style TargetType="{x:Type TextBox}" x:Key="TitleTextBox">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="NoirPro ☞" />
-            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontSize" Value="16" />
             <Setter Property="FontStyle" Value="Normal" />
             <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="Margin" Value="0,0,0,0" />
-            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Foreground" Value="WhiteSmoke" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="IsReadOnly" Value="False" />
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseDoubleClick">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsReadOnly">
+                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False"/>
+                                </BooleanAnimationUsingKeyFrames>
+                                <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                        To="#B0FFFFFF" Duration="0:0:1"/>
+                                <ColorAnimation Storyboard.TargetProperty="Foreground.Color"
+                                        To="Black" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="LostFocus">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsReadOnly">
+                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
+                                </BooleanAnimationUsingKeyFrames>
+                                <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                        To="Transparent" Duration="0:0:1"/>
+                                <ColorAnimation Storyboard.TargetProperty="Foreground.Color"
+                                        To="WhiteSmoke" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="{x:Type TextBox}" x:Key="DescriptionTextBox">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="NoirPro ☞" />
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontSize" Value="14" />
             <Setter Property="FontStyle" Value="Normal" />
             <Setter Property="FontWeight" Value="Light" />
             <Setter Property="Margin" Value="0,0,0,0" />
-            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Foreground" Value="WhiteSmoke" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="IsReadOnly" Value="False" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseDoubleClick">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsReadOnly">
+                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False"/>
+                                </BooleanAnimationUsingKeyFrames>
+                                <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                        To="#B0FFFFFF" Duration="0:0:1"/>
+                                <ColorAnimation Storyboard.TargetProperty="Foreground.Color"
+                                        To="Black" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="LostFocus">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="IsReadOnly">
+                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
+                                </BooleanAnimationUsingKeyFrames>
+                                <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                        To="Transparent" Duration="0:0:1"/>
+                                <ColorAnimation Storyboard.TargetProperty="Foreground.Color"
+                                        To="WhiteSmoke" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="{x:Type Button}" x:Key="CompleteFlagButton">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="Bd" Background="Transparent">
+                        <Border x:Name="Bd" Background="Transparent"
+                                CornerRadius="90">
                             <Path x:Name="Pt" Data="M0,0 M0.2,0.2 L 0.8,0.8 M0.2,0.8 L0.8,0.2 M1,1"
                       Stretch="Uniform" Stroke="Black" StrokeThickness="2"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="Red"/>
+
+                                <Setter TargetName="Bd" Property="Background" Value="#A0FF0000"/>
                                 <Setter TargetName="Pt" Property="Stroke" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="EditButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="Transparent">
+                            <Grid>
+                                <Ellipse x:Name="St" Width="12" Height="12" Fill="#80000000"/>
+                                <Ellipse x:Name="Pt" Width="8" Height="8" Fill="{Binding PriorityColor}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Pt" Property="Stroke" Value="#B00000FF"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -110,29 +196,50 @@
                                         IsHitTestVisible="True"
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Stretch"
-                                        Grid.Column="0" />
-                                
+                                        Grid.Column="0" 
+                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                                        CommandParameter="{Binding}"/>
+
                                 <StackPanel Grid.Column="1"
                                             Height="Auto">
                                     <TextBox Text="{Binding Path=Title}" 
-                                             Style="{StaticResource TitleTextBox}"/>
+                                             Style="{StaticResource TitleTextBox}"
+                                             x:Name="textBox">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="LostFocus">
+                                                <i:InvokeCommandAction Command="{Binding DataContext.SaveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
                                     <TextBox Text="{Binding Path=Description}"
-                                             Style="{StaticResource DescriptionTextBox}"/>
+                                             Style="{StaticResource DescriptionTextBox}">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="LostFocus">
+                                                <i:InvokeCommandAction Command="{Binding DataContext.SaveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+
+
                                 </StackPanel>
+
                                 <Button Height="20"
                                         Width="20"
                                         Margin="0,0,0,5"
                                         IsHitTestVisible="True"
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Left"
-                                        Grid.Column="2" >
+                                        Grid.Column="2" 
+                                        Style="{StaticResource EditButton}"
+                                        Command="{Binding DataContext.ChangePriorityCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                                        CommandParameter="{Binding}">
 
                                 </Button>
                             </Grid>
                             <Rectangle VerticalAlignment="Bottom"
                                        HorizontalAlignment="Stretch"
                                        Height="2"
-                                       Fill="DarkGray"
+                                       Fill="#60000000"
                                        Grid.Row="1"/>
                         </Grid>
                     </DataTemplate>
@@ -161,23 +268,33 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
+                        Margin="0,5,0,0"
                         Grid.Row="0">
                 <Button Content="L" 
                         Width="20"
-                        Margin="0,0,10,0" 
+                        Height="20"
+                        Margin="0,0,10,0"
+                        Style="{StaticResource RoundedBaseButton}"
                         Command="{Binding DateSwitchCommand}"
-                        CommandParameter="0" />
+                        CommandParameter="0" >
+                </Button>
                 <TextBlock Text="{Binding SelectedDate, 
                            StringFormat=' {0:D}',
                            ConverterCulture=ru-RU}" 
-                           Foreground="Black"
+                           Foreground="WhiteSmoke"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           FontFamily="Noir Pro ☞"
                            Grid.Row="0"
                            Width="200"
+                           VerticalAlignment="Center"
                            TextAlignment="Center"
                            HorizontalAlignment="Center" />
                 <Button Content="R" 
-                        Width="20" 
+                        Width="20"
+                        Height="20"
                         Margin="10,0,0,0" 
+                        Style="{StaticResource RoundedBaseButton}"
                         Command="{Binding DateSwitchCommand}"
                         CommandParameter="1" />
             </StackPanel>
@@ -202,8 +319,9 @@
                     Height="50"
                     Width="180"
                     Grid.Row="2"
+                    Style="{StaticResource BaseButton}"
                     Command="{Binding NewTaskCommand}"
-                    VerticalAlignment="Bottom"
+                    VerticalAlignment="Center"
                     Margin="5" />
         </Grid>
     </Grid>

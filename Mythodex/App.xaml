@@ -5,6 +5,29 @@
              xmlns:dd="urn:gong-wpf-dragdrop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
+        <Style x:Key="BaseButton" TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="NoirPro ☞" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontStyle" Value="Normal" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#40FFFFFF"/>
+            <Setter Property="Foreground" Value="#DF000000"/>
+        </Style>
+        <Style x:Key="RoundedBaseButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="90">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

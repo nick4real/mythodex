@@ -6,6 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:vm="clr-namespace:Mythodex.ViewModel"
         xmlns:views="clr-namespace:Mythodex.View"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="MainWindow" 
@@ -31,34 +32,24 @@
 
     <!--Window element styles-->
     <Window.Resources>
+        <vm:MaxHeightConverter x:Key="MaxHeightConverter"/>
+        <sys:Int32 x:Key="MaxHeightCalebrate">60</sys:Int32>
         <LinearGradientBrush x:Key="BGK" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="PeachPuff" Offset="0" />
-            <GradientStop Color="PapayaWhip" Offset="1" />
+            <GradientStop Color="{Binding PrimaryColor}" Offset="0" />
+            <GradientStop Color="{Binding SecondaryColor}" Offset="1" />
         </LinearGradientBrush>
-        <LinearGradientBrush x:Key="BGK2" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#2e6b41" Offset="0" />
-            <GradientStop Color="#558263" Offset="1" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="BGK1" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="Red" Offset="0" />
-            <GradientStop Color="Orange" Offset="0.17" />
-            <GradientStop Color="Yellow" Offset="0.33" />
-            <GradientStop Color="Green" Offset="0.5" />
-            <GradientStop Color="Blue" Offset="0.67" />
-            <GradientStop Color="Indigo" Offset="0.83" />
-            <GradientStop Color="Violet" Offset="1" />
-        </LinearGradientBrush>
-        <Style TargetType="{x:Type Button}" x:Key="CustomWindowButton">
+        <Style TargetType="{x:Type Button}" x:Key="CustomWindowButton" BasedOn="{StaticResource BaseButton}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="FontSize" Value="20"/>
         </Style>
-        <Style TargetType="{x:Type Button}" x:Key="PanelButton">
+        <Style TargetType="{x:Type Button}" x:Key="PanelButton" BasedOn="{StaticResource BaseButton}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Width" Value="80"/>
         </Style>
         <Style TargetType="{x:Type Label}" x:Key="CustomMenuUpperFont">
             <Setter Property="HorizontalAlignment" Value="Left" />
@@ -126,6 +117,32 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type ListBox}" x:Key="WeekGridListBoxStyle" >
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="dd:DragDrop.IsDragSource" Value="True"/>
+            <Setter Property="dd:DragDrop.IsDropTarget" Value="True"/>
+            <Setter Property="dd:DragDrop.UseDefaultDragAdorner" Value="True"/>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border Margin="5"
+                                HorizontalAlignment="Stretch"
+                                BorderThickness="1"
+                                BorderBrush="SteelBlue" 
+                                CornerRadius="4">
+                            <TextBox Text="{Binding Path=Title}"
+                                     Width="235"
+                                     Background="#00000000"
+                                     TextWrapping="WrapWithOverflow"
+                                     Height="60"/>
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <!--Window-->
@@ -151,21 +168,70 @@
                     Content="Настройки" 
                     Click="Settings_Click" />
             <Button Style="{StaticResource PanelButton}" 
-                    Margin="210,0,0,0" 
-                    Content="Уведомления" />
+                    Margin="230,0,0,0" 
+                    Content="Задачи"
+                    Click="PersonalTask_Click">
+            </Button>
 
             <Button Style="{StaticResource CustomWindowButton}" 
                     Margin="0,0,5,0" 
-                    Content="X"
-                    Command="{Binding CloseCommand}" />
+                    Content=""
+                    Command="{Binding CloseCommand}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent" CornerRadius="0">
+                            <Path x:Name="Pt" 
+                                  Data="M18 6L6 18M6 6l12 12" 
+                                  Stroke="White" 
+                                  StrokeThickness="2" 
+                                  StrokeLineJoin="Round"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Pt" Property="Stroke" Value="Red"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
             <Button Style="{StaticResource CustomWindowButton}" 
                     Margin="0,0,40,0" 
                     Content="O"
-                    Command="{Binding MaximizeCommand}" />
+                    Command="{Binding MaximizeCommand}" >
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="Transparent"
+                                CornerRadius="0">
+                            <Path Data="M 12 6 A 6 6 0 1 0 18 12 A 6 6 0 0 0 12 6 Z M 12 8 A 4 4 0 1 1 8 12 A 4 4 0 0 1 12 8 Z" 
+                                  Fill="White"
+                                  x:Name="Pt" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Pt" Property="Stroke" Value="Yellow"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
             <Button Style="{StaticResource CustomWindowButton}" 
                     Margin="0,0,75,0"
                     Content="-"
-                    Command="{Binding MinimizeCommand}" />
+                    Command="{Binding MinimizeCommand}" >
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd" Background="Transparent"
+                                CornerRadius="0">
+                            <Path  x:Name="Pt" Data="M 5 12 h 14 v -2 H 5 v 2 z" Fill="White" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Pt" Property="Stroke" Value="Green"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Grid>
 
         <!--Lower grid-->
@@ -192,16 +258,22 @@
                     <Button Width="Auto"
                             Content="Сегодня"
                             Height="30" 
+                            Margin="5"
+                            Style="{StaticResource BaseButton}"
                             Command="{Binding OpenPageCommand}" 
                             CommandParameter="Today" />
                     <Button Width="Auto"
                             Content="Неделя"
                             Height="30" 
+                            Margin="5"
+                            Style="{StaticResource BaseButton}"
                             Command="{Binding OpenPageCommand}" 
                             CommandParameter="Week" />
                     <Button Width="Auto"
                             Content="Месяц"
                             Height="30"
+                            Margin="5"
+                            Style="{StaticResource BaseButton}"
                             Command="{Binding OpenPageCommand}" 
                             CommandParameter="Month" />
                     <TextBlock Height="30"
@@ -216,22 +288,36 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox Margin="5"
-                                 Height="30"
-                                 Background="WhiteSmoke"
-                                 Text="{Binding NewProjectTextBox}"
-                                 Grid.Column="0"/>
+                        <Grid Grid.Column="0"
+                              Margin="5"> 
+                            
+                        </Grid>
+                        <TextBox Height="30"
+                                 Grid.Column="0"
+                                 Margin="5"
+                                 Background="#30FFFFFF"
+                                 MaxLength="30"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 BorderThickness="4"
+                                 BorderBrush="#30000000"
+                                 FontSize="12"
+                                 FontFamily="Noir Pro ☞"
+                                 Text="{Binding NewProjectTextBox}" />
                         <Button Width="30"
                                 Margin="5"
                                 Content="+"
                                 Height="30"
                                 Grid.Column="1"
+                                Style="{StaticResource RoundedBaseButton}"
                                 Command="{Binding NewProjectCommand}"/>
                     </Grid>
                     <ItemsControl ItemsSource="{Binding ButtonList}" Height="240">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Button Height="30"
+                                        Margin="5"
+                                        Style="{StaticResource BaseButton}"
                                         Content="{Binding ProjectName}" 
                                         Command="{Binding DataContext.OpenProjectCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                         CommandParameter="{Binding ProjectName}"/>
@@ -256,15 +342,90 @@
                     <Frame x:Name="MainPanelPage" DataContext="{Binding}"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="Settings" Visibility="Hidden">
-                <Frame HorizontalAlignment="Left" Width="400">
-                    <Frame.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                            <GradientStop Color="#00000000" Offset="1"/>
-                            <GradientStop Color="#A0000000" Offset="0"/>
+            <Grid x:Name="Settings" 
+                  Visibility="Hidden" 
+                  Width="255"
+                  HorizontalAlignment="Left">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#00000000" Offset="1"/>
+                        <GradientStop Color="#A0000000" Offset="0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid Margin="20">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" Opacity="1">
+                            <GradientStop Color="{Binding PrimaryColor}" Offset="0" />
+                            <GradientStop Color="{Binding SecondaryColor}" Offset="1" />
                         </LinearGradientBrush>
-                    </Frame.Background>
-                </Frame>
+                    </Grid.Background>
+                    <Grid Background="#40000000"/>
+                    <StackPanel Margin="0,5,0,0"
+                                Orientation="Vertical"
+                                Background="Transparent">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Button}" x:Key="MenuPanelButton" BasedOn="{StaticResource BaseButton}">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="Width" Value="200"/>
+                                
+                            </Style>
+                        </StackPanel.Resources>
+                        <Label Content="Цветовая палитра" Style="{StaticResource CustomMenuLowerFont}" HorizontalAlignment="Center"/>
+                        <Button Style="{StaticResource MenuPanelButton}" 
+                                Margin="0,5,0,0" 
+                                Content="Светлая тема"
+                                Command="{Binding ThemeCommand}"
+                                CommandParameter="Light"/>
+                        <Button Style="{StaticResource MenuPanelButton}" 
+                                Margin="0,5,0,0" 
+                                Content="Тёмная тема" 
+                                Command="{Binding ThemeCommand}"
+                                CommandParameter="Dark"/>
+                        <Button Style="{StaticResource MenuPanelButton}" 
+                                Margin="0,5,0,0" 
+                                Content="Эмеральд" 
+                                Command="{Binding ThemeCommand}"
+                                CommandParameter="Emerald"/>
+                        <Button Style="{StaticResource MenuPanelButton}" 
+                                Margin="0,5,0,0" 
+                                Content="Рубин" 
+                                Command="{Binding ThemeCommand}"
+                                CommandParameter="Ruby"/>
+                        <Button Style="{StaticResource MenuPanelButton}" 
+                                Margin="0,5,0,0" 
+                                Content="Аквамарин" 
+                                Command="{Binding ThemeCommand}"
+                                CommandParameter="Aquamarine"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid x:Name="PersonalTasks" 
+                  Visibility="Hidden" 
+                  Width="400"
+                  HorizontalAlignment="Left">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#00000000" Offset="1"/>
+                        <GradientStop Color="#A0000000" Offset="0"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                
+                <Grid Margin="20">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" Opacity="1">
+                            <GradientStop Color="{Binding PrimaryColor}" Offset="0" />
+                            <GradientStop Color="{Binding SecondaryColor}" Offset="1" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Grid Background="#40000000"/>
+                    <ListBox Style="{StaticResource WeekGridListBoxStyle}"
+                             ItemsSource="{Binding TemplateItems}" 
+                             Background="Transparent">
+                        
+                    </ListBox>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

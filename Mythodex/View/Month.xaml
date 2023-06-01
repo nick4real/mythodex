@@ -14,11 +14,14 @@
     <Page.Resources>
         <vm:MaxHeightConverter x:Key="MaxHeightConverter"/>
         <sys:Int32 x:Key="MaxHeightCalebrate">80</sys:Int32>
-        <SolidColorBrush x:Key="MainColorBrush2" Color="DarkRed" />
-        <LinearGradientBrush x:Key="MainColorBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#2e6b41" Offset="0" />
-            <GradientStop Color="#558263" Offset="1" />
+        <LinearGradientBrush x:Key="LinearColorBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="#FF333333" />
+            <GradientStop Offset="1" Color="#FF333333" />
         </LinearGradientBrush>
+        <RadialGradientBrush x:Key="RadialColorBrush" GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+            <GradientStop Offset="0" Color="#FF333333" />
+            <GradientStop Offset="1" Color="#FF333333" />
+        </RadialGradientBrush>
         
         <ControlTemplate x:Key="CalendarItemTemplate1" TargetType="{x:Type CalendarItem}">
             <ControlTemplate.Resources>
@@ -54,7 +57,7 @@
                             <ControlTemplate x:Key="PreviousButtonTemplate" TargetType="{x:Type Button}">
                                 <Border Cursor="Hand"
                                             CornerRadius="20"
-                                            Background="{StaticResource MainColorBrush}">
+                                            Background="{StaticResource RadialColorBrush}">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="CommonStates">
                                             <VisualState x:Name="Normal"/>
@@ -85,7 +88,7 @@
                             <ControlTemplate x:Key="NextButtonTemplate" TargetType="{x:Type Button}">
                                 <Border Cursor="Hand"
                                             CornerRadius="20"
-                                            Background="{StaticResource MainColorBrush}">
+                                            Background="{StaticResource RadialColorBrush}">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="CommonStates">
                                             <VisualState x:Name="Normal"/>
@@ -330,7 +333,7 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Rectangle x:Name="TodayBackground" Fill="{StaticResource MainColorBrush}" Opacity="0" RadiusX="1" RadiusY="1"/>
+                            <Rectangle x:Name="TodayBackground" Fill="{StaticResource LinearColorBrush}" Opacity="0" RadiusX="1" RadiusY="1"/>
                             <Rectangle x:Name="SelectedBackground" Fill="#FFBADDE9" Opacity="0" RadiusX="1" RadiusY="1"/>
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
                             <Rectangle x:Name="HighlightBackground" Fill="#FFBADDE9" Opacity="0" RadiusX="1" RadiusY="1"/>

@@ -47,9 +47,9 @@
                                 CornerRadius="4">
                             <TextBox Text="{Binding Path=Title}"
                                      Width="235"
-                                       Background="#00000000"
-                                       TextWrapping="WrapWithOverflow"
-                                       Height="60"/>
+                                     Background="#00000000"
+                                     TextWrapping="WrapWithOverflow"
+                                     Height="60"/>
                         </Border>
                     </DataTemplate>
                 </Setter.Value>

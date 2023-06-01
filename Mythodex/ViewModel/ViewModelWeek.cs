@@ -153,17 +153,6 @@ namespace Mythodex.ViewModel
             FridayItems.CollectionChanged += FridayCollectionChanged;
             SaturdayItems.CollectionChanged += SaturdayCollectionChanged;
             SundayItems.CollectionChanged += SundayCollectionChanged;
-
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1); // Здесь n - интервал времени в секундах
-            timer.Tick += Timer_Tick;
-
-            void Timer_Tick(object sender, EventArgs e)
-            {
-                SaveAllItems();
-            }
-
-            timer.Start();
         }
 
         #region CollectionChangedEvent
@@ -200,7 +189,34 @@ namespace Mythodex.ViewModel
             TaskDataManager.SaveTaskCollection((ObservableCollection<Task>)sender, DateConverter.GetWeekDate(FirstDayWeekDate, 7));
         }
         #endregion
-
+        
+        private ICommand saveCommand;
+        public ICommand SaveCommand
+        {
+            get
+            {
+                return saveCommand ?? new RelayCommand(param =>
+                {
+                    SaveAllItems();
+                });
+            }
+        }
+        private ICommand changePriorityCommand;
+        public ICommand ChangePriorityCommand
+        {
+            get
+            {
+                return changePriorityCommand ?? new RelayCommand(param =>
+                {
+                    var task = (Task)param;
+                    if (task.Priority == 3)
+                        task.Priority = 1;
+                    else
+                        task.Priority++;
+                    SaveAllItems();
+                });
+            }
+        }
         private ICommand newTaskCommand;
         public ICommand NewTaskCommand
         {
@@ -214,6 +230,46 @@ namespace Mythodex.ViewModel
                     );
                 }
                 return newTaskCommand;
+            }
+        }
+        private ICommand deleteCommand;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                return deleteCommand ?? new RelayCommand(param =>
+                {
+                    Task task = (Task)param;
+                    if (MondayItems.Contains(task))
+                    {
+                        MondayItems.Remove(task);
+                    }
+                    else if (TuesdayItems.Contains(task))
+                    {
+                        TuesdayItems.Remove(task);
+                    }
+                    else if (WednesdayItems.Contains(task))
+                    {
+                        WednesdayItems.Remove(task);
+                    }
+                    else if (ThursdayItems.Contains(task))
+                    {
+                        ThursdayItems.Remove(task);
+                    }
+                    else if (FridayItems.Contains(task))
+                    {
+                        FridayItems.Remove(task);
+                    }
+                    else if (SaturdayItems.Contains(task))
+                    {
+                        SaturdayItems.Remove(task);
+                    }
+                    else if (SundayItems.Contains(task))
+                    {
+                        SundayItems.Remove(task);
+                    }
+                    SaveAllItems();
+                });
             }
         }
 
@@ -284,7 +340,7 @@ namespace Mythodex.ViewModel
                     dateTime = 7;
                     break;
             }
-            collection.Add(TaskLipsumGenerator.Next());
+            collection.Add(TaskGenerator.Next());
             TaskDataManager.SaveTaskCollection(collection, DateConverter.GetWeekDate(FirstDayWeekDate, dateTime));
         }
         private void SaveAllItems()

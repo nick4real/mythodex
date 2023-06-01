@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace Mythodex.ViewModel
@@ -25,7 +26,47 @@ namespace Mythodex.ViewModel
                 OnPropertyChanged(nameof(ButtonList));
             }
         }
-        
+        private ObservableCollection<Task> templateItems;
+        public ObservableCollection<Task> TemplateItems
+        {
+            get { return templateItems; }
+            set
+            {
+                templateItems = value;
+                OnPropertyChanged(nameof(TemplateItems));
+            }
+        }
+        private Color primaryColor;
+        public Color PrimaryColor
+        {
+            get { return primaryColor; }
+            set
+            {
+                primaryColor = value;
+                OnPropertyChanged(nameof(PrimaryColor));
+            }
+        }
+        private Color secondaryColor;
+        public Color SecondaryColor
+        {
+            get { return secondaryColor; }
+            set
+            {
+                secondaryColor = value;
+                OnPropertyChanged(nameof(SecondaryColor));
+            }
+        }
+        private Color accentColor;
+        public Color AccentColor
+        {
+            get { return accentColor; }
+            set
+            {
+                accentColor = value;
+                OnPropertyChanged(nameof(AccentColor));
+            }
+        }
+
         private string newProjectTextBox;
         public string NewProjectTextBox
         {
@@ -44,23 +85,28 @@ namespace Mythodex.ViewModel
             mainPanelPage = frame;
             mainPanelPage.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
+            PrimaryColor = (Color)ColorConverter.ConvertFromString("#f3c9a0");
+            SecondaryColor = (Color)ColorConverter.ConvertFromString("#f7e8bb");
+
             ApplicationPaths.Check();
 
             frame.Content = new Today();
 
             ReloadButtons();
+
+            TemplateItems = TaskGenerator.Next(4);
         }
 
         private void ReloadButtons()
         {
-            string folderPath = ApplicationPaths.ProjectsFolder; // Укажите путь к папке, где находятся файлы
+            string folderPath = ApplicationPaths.ProjectsFolder;
             ButtonList = new ObservableCollection<ProjectButton>();
 
-            string[] files = Directory.GetFiles(folderPath); // Получение списка файлов в папке
+            string[] files = Directory.GetFiles(folderPath);
 
             foreach (string filePath in files)
             {
-                string fileName = Path.GetFileName(filePath); // Получение названия файла из полного пути
+                string fileName = Path.GetFileName(filePath);
 
                 ProjectButton projectButton = new ProjectButton()
                 {
@@ -72,6 +118,63 @@ namespace Mythodex.ViewModel
         }
 
         #region Commands
+        private ICommand themeCommand;
+        public ICommand ThemeCommand
+        {
+            get
+            {
+                return themeCommand ?? new RelayCommand(param =>
+                {
+                    switch((string)param)
+                    {
+                        case "Light":
+                            PrimaryColor = (Color)ColorConverter.ConvertFromString("#f3c9a0");
+                            SecondaryColor = (Color)ColorConverter.ConvertFromString("#f7e8bb");
+                            break;
+                        case "Dark":
+                            PrimaryColor = (Color)ColorConverter.ConvertFromString("#333333");
+                            SecondaryColor = (Color)ColorConverter.ConvertFromString("#4d4d4d");
+                            break;
+                        case "Emerald":
+                            PrimaryColor = (Color)ColorConverter.ConvertFromString("#2e6b41");
+                            SecondaryColor = (Color)ColorConverter.ConvertFromString("#558263");
+                            break;
+                        case "Ruby":
+                            PrimaryColor = (Color)ColorConverter.ConvertFromString("#e84a4a");
+                            SecondaryColor = (Color)ColorConverter.ConvertFromString("#d86e6e");
+                            break; 
+                        case "Aquamarine":
+                            PrimaryColor = (Color)ColorConverter.ConvertFromString("#297a69");
+                            SecondaryColor = (Color)ColorConverter.ConvertFromString("#297a69");
+                            break;
+                    }
+                });
+            }
+        }
+        private ICommand darkThemeCommand;
+        public ICommand DarkThemeCommand
+        {
+            get
+            {
+                return darkThemeCommand ?? new RelayCommand(param =>
+                {
+                    PrimaryColor = (Color)ColorConverter.ConvertFromString("PeachPuff");
+                    SecondaryColor = (Color)ColorConverter.ConvertFromString("PapayaWhip");
+                });
+            }
+        }
+        private ICommand lightThemeCommand;
+        public ICommand LightThemeCommand
+        {
+            get
+            {
+                return lightThemeCommand ?? new RelayCommand(param =>
+                {
+                    PrimaryColor = (Color)ColorConverter.ConvertFromString("#2e6b41");
+                    SecondaryColor = (Color)ColorConverter.ConvertFromString("#558263");
+                });
+            }
+        }
         private ICommand closeCommand;
         public ICommand CloseCommand
         {

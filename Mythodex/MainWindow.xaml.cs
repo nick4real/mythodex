@@ -23,7 +23,17 @@ namespace Mythodex
 
         public void Settings_Click(object sender, RoutedEventArgs e)
         {
-            Settings.Visibility = (Settings.Visibility == Visibility.Visible) ? Visibility.Hidden : Visibility.Visible;  
+            Settings.Visibility = (Settings.Visibility == Visibility.Visible || PersonalTasks.Visibility == Visibility.Visible) 
+                ? Visibility.Hidden : Visibility.Visible;
+            if (PersonalTasks.Visibility == Visibility.Visible)
+                PersonalTasks.Visibility = Visibility.Hidden;
+        }
+        public void PersonalTask_Click(object sender, RoutedEventArgs e)
+        {
+            PersonalTasks.Visibility = (PersonalTasks.Visibility == Visibility.Visible || Settings.Visibility == Visibility.Visible) 
+                ? Visibility.Hidden : Visibility.Visible;
+            if (Settings.Visibility == Visibility.Visible)
+                Settings.Visibility = Visibility.Hidden;
         }
 
         void Window_SourceInitialized(object sender, EventArgs e)

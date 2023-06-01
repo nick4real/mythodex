@@ -43,6 +43,8 @@ namespace Mythodex.ViewModel
             DayItems = TaskDataManager.LoadTaskCollection(SelectedDate);
 
             DayItems.CollectionChanged += DayCollectionChanged;
+
+            
         }
         public ViewModelToday(DateTime dateTime)
         {
@@ -57,6 +59,33 @@ namespace Mythodex.ViewModel
             TaskDataManager.SaveTaskCollection((ObservableCollection<Task>)sender, SelectedDate);
         }
 
+        private ICommand saveCommand;
+        public ICommand SaveCommand
+        {
+            get
+            {
+                return saveCommand ?? new RelayCommand(param =>
+                {
+                    TaskDataManager.SaveTaskCollection(DayItems, SelectedDate);
+                });
+            }
+        }
+        private ICommand changePriorityCommand;
+        public ICommand ChangePriorityCommand
+        {
+            get
+            {
+                return changePriorityCommand ?? new RelayCommand(param =>
+                {
+                    var task = (Task)param;
+                    if (task.Priority == 3)
+                        task.Priority = 1;
+                    else
+                        task.Priority++;
+                    TaskDataManager.SaveTaskCollection(DayItems, SelectedDate);
+                });
+            }
+        }
         private ICommand newTaskCommand;
         public ICommand NewTaskCommand
         {
@@ -70,6 +99,17 @@ namespace Mythodex.ViewModel
                     );
                 }
                 return newTaskCommand;
+            }
+        }
+        private ICommand deleteCommand;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                return deleteCommand ?? new RelayCommand(param =>
+                {
+                    DayItems.Remove((Task)param);
+                });
             }
         }
         private ICommand dateSwitchCommand;
@@ -99,7 +139,7 @@ namespace Mythodex.ViewModel
         }
         private void NewTask_Click(object sender, EventArgs e)
         {
-            DayItems.Add(TaskLipsumGenerator.Next());
+            DayItems.Add(TaskGenerator.Next());
             TaskDataManager.SaveTaskCollection(DayItems, SelectedDate);
         }
 

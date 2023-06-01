@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows.Media;
 
 namespace Mythodex.Model
 {
@@ -9,8 +10,6 @@ namespace Mythodex.Model
         private string title;
         private string description;
         private int priority;
-        private string date;
-        private bool isCompleted;
 
         public string Title
         {
@@ -18,7 +17,7 @@ namespace Mythodex.Model
             set
             {
                 title = value;
-                OnPropertyChanged("Title");
+                OnPropertyChanged(nameof(Title));
             }
         }
         public string Description
@@ -27,7 +26,7 @@ namespace Mythodex.Model
             set
             {
                 description = value;
-                OnPropertyChanged("Description");
+                OnPropertyChanged(nameof(Description));
             }
         }
         public int Priority
@@ -36,25 +35,25 @@ namespace Mythodex.Model
             set
             {
                 priority = value;
-                OnPropertyChanged("Priority");
+                OnPropertyChanged(nameof(Priority));
+                OnPropertyChanged(nameof(PriorityColor));
             }
         }
-        public string Date
+        public SolidColorBrush PriorityColor
         {
-            get { return date; }
-            set
+            get
             {
-                date = value;
-                OnPropertyChanged("Date");
-            }
-        }
-        public bool IsCompleted
-        {
-            get { return isCompleted; }
-            set
-            {
-                isCompleted = value;
-                OnPropertyChanged("IsCompleted");
+                switch (Priority)
+                {
+                    case 1:
+                        return new SolidColorBrush(Colors.Green);
+                    case 2:
+                        return new SolidColorBrush(Colors.Yellow);
+                    case 3:
+                        return new SolidColorBrush(Colors.Red);
+                    default:
+                        return new SolidColorBrush(Colors.Black);
+                }
             }
         }
 

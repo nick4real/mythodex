@@ -43,7 +43,7 @@ namespace Mythodex.Model
             {
                 return newTaskCommand ?? new RelayCommand(param =>
                 {
-                    TaskCollection.Add(TaskLipsumGenerator.Next());
+                    TaskCollection.Add(TaskGenerator.Next());
                 });
             }
         }

@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 
 namespace Mythodex.ViewModel
 {
-    internal static class TaskLipsumGenerator
+    internal static class TaskGenerator
     {
         public static Task Next()
         {
-            return new Task { Title = Lorem.Sentence(8), Description = Lorem.Sentence(20), Priority = 3 };
+            return new Task { Title = "Загаловок", Description = "Описание", Priority = 1 };
         }
         public static ObservableCollection<Task> Next(int i)
         {
