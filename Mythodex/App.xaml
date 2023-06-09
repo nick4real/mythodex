@@ -6,7 +6,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="BaseButton" TargetType="{x:Type Button}">
-            <Setter Property="FontFamily" Value="NoirPro ☞" />
+            <Setter Property="FontFamily" Value="pack://application:,,,/View/Resources/#NoirPro ☞" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontStyle" Value="Normal" />
             <Setter Property="FontWeight" Value="Normal" />

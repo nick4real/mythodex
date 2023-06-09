@@ -18,7 +18,7 @@
         <Style TargetType="{x:Type TextBox}" x:Key="TitleTextBox">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="NoirPro ☞" />
+            <Setter Property="FontFamily" Value="pack://application:,,,/View/Resources/#NoirPro ☞" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontStyle" Value="Normal" />
             <Setter Property="FontWeight" Value="Normal" />
@@ -64,7 +64,7 @@
         <Style TargetType="{x:Type TextBox}" x:Key="DescriptionTextBox">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="NoirPro ☞" />
+            <Setter Property="FontFamily" Value="pack://application:,,,/View/Resources/#NoirPro ☞" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontStyle" Value="Normal" />
             <Setter Property="FontWeight" Value="Light" />
@@ -286,7 +286,7 @@
                            FontWeight="Bold"
                            FontFamily="Noir Pro ☞"
                            Grid.Row="0"
-                           Width="200"
+                           Width="Auto"
                            VerticalAlignment="Center"
                            TextAlignment="Center"
                            HorizontalAlignment="Center" />

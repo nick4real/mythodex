@@ -31,16 +31,14 @@ namespace Mythodex.ViewModel
         public ViewModelProjectTemplate(string projectName)
         {
             ProjectDesk = TaskDataManager.LoadProjectFile(projectName);
-            
+
+            void Save(object? sender, EventArgs e)
+            {
+                TaskDataManager.SaveProjectFile(projectDesk, projectName);
+            }
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(2);
-            timer.Tick += Timer_Tick;
-
-            void Timer_Tick(object sender, EventArgs e)
-            {
-                TaskDataManager.SaveProjectFile(ProjectDesk, projectName);
-            }
-
+            timer.Tick += Save;
             timer.Start();
         }
 

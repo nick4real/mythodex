@@ -26,16 +26,6 @@ namespace Mythodex.ViewModel
                 OnPropertyChanged(nameof(ButtonList));
             }
         }
-        private ObservableCollection<Task> templateItems;
-        public ObservableCollection<Task> TemplateItems
-        {
-            get { return templateItems; }
-            set
-            {
-                templateItems = value;
-                OnPropertyChanged(nameof(TemplateItems));
-            }
-        }
         private Color primaryColor;
         public Color PrimaryColor
         {
@@ -93,8 +83,6 @@ namespace Mythodex.ViewModel
             frame.Content = new Today();
 
             ReloadButtons();
-
-            TemplateItems = TaskGenerator.Next(4);
         }
 
         private void ReloadButtons()
@@ -281,6 +269,28 @@ namespace Mythodex.ViewModel
                         GC.WaitForPendingFinalizers();
                     }
                     mainPanelPage.Navigate(new ProjectTemplate((string)param));
+                }));
+            }
+        }
+        private ICommand deleteProjectCommand;
+        public ICommand DeleteProjectCommand
+        {
+            get
+            {
+                return deleteProjectCommand ?? (deleteProjectCommand = new RelayCommand(param =>
+                {
+                    var page = mainPanelPage.Content as ProjectTemplate;
+                    if (page != null)
+                    {
+                        page.Cleanup();
+
+                        mainPanelPage.Content = null;
+
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                    }
+                    TaskDataManager.DeleteProjectFile((string)param);
+                    ReloadButtons();
                 }));
             }
         }

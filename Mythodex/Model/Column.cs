@@ -1,17 +1,15 @@
 ﻿using Mythodex.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Mythodex.Model
 {
     public class Column : INotifyPropertyChanged
     {
+        public string ProjectName;
+        public ProjectDesk ParentProject;
+
         private string name;
         public string Name
         {
@@ -35,6 +33,7 @@ namespace Mythodex.Model
         public Column()
         {
             TaskCollection = new ObservableCollection<Task>();
+            Name = "Колонка";
         }
         private ICommand newTaskCommand;
         public ICommand NewTaskCommand
@@ -44,6 +43,34 @@ namespace Mythodex.Model
                 return newTaskCommand ?? new RelayCommand(param =>
                 {
                     TaskCollection.Add(TaskGenerator.Next());
+                });
+            }
+        }
+        private ICommand deleteCommand;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                return deleteCommand ?? new RelayCommand(param =>
+                {
+                    Task task = (Task)param;
+
+                    TaskCollection.Remove(task);
+                });
+            }
+        }
+        private ICommand changePriorityCommand;
+        public ICommand ChangePriorityCommand
+        {
+            get
+            {
+                return changePriorityCommand ?? new RelayCommand(param =>
+                {
+                    var task = (Task)param;
+                    if (task.Priority == 3)
+                        task.Priority = 1;
+                    else
+                        task.Priority++;
                 });
             }
         }

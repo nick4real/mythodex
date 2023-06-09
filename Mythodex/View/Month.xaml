@@ -27,7 +27,7 @@
             <ControlTemplate.Resources>
                 <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
                     <TextBlock Foreground="#FF333333" 
-                               FontFamily="NoirPro ☞" 
+                               FontFamily="pack://application:,,,/View/Resources/#NoirPro ☞" 
                                FontWeight="Bold" 
                                FontSize="9.5" 
                                HorizontalAlignment="Center" 

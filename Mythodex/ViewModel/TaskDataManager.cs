@@ -70,5 +70,11 @@ namespace Mythodex.ViewModel
             }
             return new ProjectDesk();
         }
+        public static void DeleteProjectFile(string projectName)
+        {
+            string fileName = Path.Combine(ApplicationPaths.ProjectsFolder, projectName);
+
+            File.Delete(fileName);
+        }
     }
 }

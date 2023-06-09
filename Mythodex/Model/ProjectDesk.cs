@@ -12,6 +12,16 @@ namespace Mythodex.Model
 {
     public class ProjectDesk : INotifyPropertyChanged
     {
+        private string projectName;
+        public string ProjectName
+        {
+            get { return projectName; }
+            set
+            {
+                projectName = value;
+                OnPropertyChanged(nameof(ProjectName));
+            }
+        }
         private ObservableCollection<Column> columnCollection;
         public ObservableCollection<Column> ColumnCollection
         {

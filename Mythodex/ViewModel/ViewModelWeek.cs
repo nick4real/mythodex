@@ -243,36 +243,42 @@ namespace Mythodex.ViewModel
                     if (MondayItems.Contains(task))
                     {
                         MondayItems.Remove(task);
+                        TaskDataManager.SaveTaskCollection(MondayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 1));
                     }
                     else if (TuesdayItems.Contains(task))
                     {
                         TuesdayItems.Remove(task);
+                        TaskDataManager.SaveTaskCollection(TuesdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 2));
                     }
                     else if (WednesdayItems.Contains(task))
                     {
                         WednesdayItems.Remove(task);
+                        TaskDataManager.SaveTaskCollection(WednesdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 3));
                     }
                     else if (ThursdayItems.Contains(task))
                     {
                         ThursdayItems.Remove(task);
+                        TaskDataManager.SaveTaskCollection(ThursdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 4));
                     }
                     else if (FridayItems.Contains(task))
                     {
                         FridayItems.Remove(task);
+                        TaskDataManager.SaveTaskCollection(FridayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 5));
                     }
                     else if (SaturdayItems.Contains(task))
                     {
                         SaturdayItems.Remove(task);
+                        TaskDataManager.SaveTaskCollection(SaturdayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 6));
                     }
                     else if (SundayItems.Contains(task))
                     {
                         SundayItems.Remove(task);
+                        TaskDataManager.SaveTaskCollection(SundayItems, DateConverter.GetWeekDate(FirstDayWeekDate, 7));
                     }
                     SaveAllItems();
                 });
             }
         }
-
         private ICommand dateSwitchCommand;
         public ICommand DateSwitchCommand
         {

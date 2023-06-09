@@ -8,7 +8,6 @@ namespace Mythodex.ViewModel
         public static string AppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mythodex");
         public static string DatesFolder = Path.Combine(AppDataFolder, "Dates");
         public static string ProjectsFolder = Path.Combine(AppDataFolder, "Projects");
-        public static string TasksFolder = Path.Combine(AppDataFolder, "Tasks");
         public static void Check()
         {
             if (!Directory.Exists(AppDataFolder))
@@ -24,11 +23,6 @@ namespace Mythodex.ViewModel
             if (!Directory.Exists(ProjectsFolder))
             {
                 Directory.CreateDirectory(ProjectsFolder);
-            }
-
-            if (!Directory.Exists(TasksFolder))
-            {
-                Directory.CreateDirectory(TasksFolder);
             }
         }
     }
