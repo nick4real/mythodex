@@ -17,22 +17,7 @@ namespace Mythodex.ViewModel
         }
         public static string ConvertToSaveFormat(DateTime input)
         {
-            if (DateTime.TryParseExact(input.ToString(), "dd.MM.yyyy H:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime))
-            {
-                return dateTime.ToString("ddMMyyyyHHmmss");
-            }
-
-            return string.Empty;
-        }
-
-        public static string ConvertToDefaultFormat(DateTime input)
-        {
-            if (DateTime.TryParseExact(input.ToString(), "ddMMyyyyHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime))
-            {
-                return dateTime.ToString("dd.MM.yyyy H:mm:ss");
-            }
-
-            return string.Empty;
+            return input.ToString("ddMMyyyy");
         }
     }
 }
